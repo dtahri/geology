@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>„Õ«ﬂ«… «·„ÃÂ— «·„” ﬁÿ»</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+	
+	.title {
+                text-align: right;
+                font-size: 20px;
+                padding: 5px;
+                font-family: Arial, sans-serif;
+		direction: rtl;
+            }
+
+        /* Right Sidebar styling */
+        #sidebar {
+            width: 200px;
+            background-color: #f4f4f4;
+            padding: 10px;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+        }
+
+        #collapsible, #collapsible2, #collapsible3, #collapsible4 {
+            background-color: #ddd;
+            cursor: pointer;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            text-align: right;
+            outline: none;
+            font-size: 20px;
+        }
+
+	  #collapsible-content, #collapsible-content2, #collapsible-content3, #collapsible-content4 {
+            display: none;
+            overflow: hidden;
+		text-align: right;
+		font-size: 15px;
+        }
+	
+        /* Centered circular layout for images and buttons */
+        #container {
+            position: relative;
+            width: 300px; /* Adjust to your desired width */
+            height: 300px; /* Adjust to your desired height */
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 12px solid #332f;
+        }
+
+        .image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: opacity 0.5s;
+        }
+
+        #buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        
+    </style>
+</head>
+<body>
+
+    <!-- Main Content -->
+    <div>
+        <h1 style="text-align: center;">„Õ«ﬂ«… «·„ÃÂ— «·„” ﬁÿ»</h1>
+        <!-- Images container in a circular shape -->
+        <div id="container">
+            <img id="image1" class="image" src="./images/1.jpg" alt="Image 1" style="opacity: 0;">
+            <img id="image2" class="image" src="./images/2.jpg" alt="Image 2" style="opacity: 0;">
+            <img id="image3" class="image" src="./images/3.jpg" alt="Image 3" style="opacity: 0;">
+            <img id="image4" class="image" src="./images/4.jpg" alt="Image 4" style="opacity: 0;">
+            <img id="image5" class="image" src="./images/5.jpg" alt="Image 5" style="opacity: 0;">
+            <img id="image6" class="image" src="./images/6.jpg" alt="Image 6" style="opacity: 0;">
+            <img id="image7" class="image" src="./images/7.jpg" alt="Image 7" style="opacity: 0;">
+            <img id="image8" class="image" src="./images/8.jpg" alt="Image 8" style="opacity: 0;">
+            <img id="image9" class="image" src="./images/9.jpg" alt="Image 9" style="opacity: 0;">
+            <img id="image10" class="image" src="./images/10.jpg" alt="Image 10" style="opacity: 0;">
+            <img id="image11" class="image" src="./images/11.jpg" alt="Image 11" style="opacity: 0;">
+            <img id="image12" class="image" src="./images/12.jpg" alt="Image 12" style="opacity: 0;">
+            <img id="image13" class="image" src="./images/13.jpg" alt="Image 13" style="opacity: 0;">
+            <img id="image14" class="image" src="./images/14.jpg" alt="Image 14" style="opacity: 0;">
+            <img id="image15" class="image" src="./images/15.jpg" alt="Image 15" style="opacity: 0;">
+            <img id="image16" class="image" src="./images/16.jpg" alt="Image 16" style="opacity: 0;">
+            <img id="image17" class="image" src="./images/17.jpg" alt="Image 17" style="opacity: 0;">
+            <img id="image18" class="image" src="./images/18.jpg" alt="Image 18" style="opacity: 0;">
+            <img id="image19" class="image" src="./images/19.jpg" alt="Image 19" style="opacity: 0;">
+            <img id="image20" class="image" src="./images/20.jpg" alt="Image 20" style="opacity: 0;">
+            <img id="image21" class="image" src="./images/21.jpg" alt="Image 21" style="opacity: 0;">
+            <img id="image22" class="image" src="./images/22.jpg" alt="Image 22" style="opacity: 0;">
+            <img id="image23" class="image" src="./images/23.jpg" alt="Image 23" style="opacity: 0;">
+            <img id="image24" class="image" src="./images/24.jpg" alt="Image 24" style="opacity: 0;">
+            <img id="image25" class="image" src="./images/25.jpg" alt="Image 25" style="opacity: 0;">
+            <img id="image26" class="image" src="./images/26.jpg" alt="Image 26" style="opacity: 0;">
+            <img id="image27" class="image" src="./images/27.jpg" alt="Image 27" style="opacity: 0;">
+            <img id="image28" class="image" src="./images/28.jpg" alt="Image 28" style="opacity: 0;">
+            <img id="image29" class="image" src="./images/29.jpg" alt="Image 29" style="opacity: 0;">
+            <img id="image30" class="image" src="./images/30.jpg" alt="Image 30" style="opacity: 0;">
+            <img id="image35" class="image" src="./images/35.jpg" alt="Image 35" style="opacity: 0;">
+            <img id="image36" class="image" src="./images/36.jpg" alt="Image 36" style="opacity: 0;">
+            <img id="image37" class="image" src="./images/37.jpg" alt="Image 37" style="opacity: 0;">
+            <img id="image38" class="image" src="./images/38.jpg" alt="Image 38" style="opacity: 0;">
+            <img id="image39" class="image" src="./images/39.jpg" alt="Image 39" style="opacity: 0;">
+            <img id="image40" class="image" src="./images/40.jpg" alt="Image 40" style="opacity: 0;">
+	    <img id="image41" class="image" src="./images/41.jpg" alt="Image 41" style="opacity: 0;">
+            <img id="image42" class="image" src="./images/42.jpg" alt="Image 42" style="opacity: 0;">
+            <img id="image43" class="image" src="./images/43.jpg" alt="Image 43" style="opacity: 0;">
+            <img id="image44" class="image" src="./images/44.jpg" alt="Image 44" style="opacity: 0;">
+            <img id="image45" class="image" src="./images/45.jpg" alt="Image 45" style="opacity: 0;">
+            <img id="image46" class="image" src="./images/46.jpg" alt="Image 46" style="opacity: 0;">
+            <img id="image47" class="image" src="./images/47.jpg" alt="Image 47" style="opacity: 0;">
+            <img id="image48" class="image" src="./images/48.jpg" alt="Image 48" style="opacity: 0;">
+            <img id="image49" class="image" src="./images/49.jpg" alt="Image 49" style="opacity: 0;">
+            <img id="image50" class="image" src="./images/50.jpg" alt="Image 50" style="opacity: 0;">
+            <img id="image51" class="image" src="./images/51.jpg" alt="Image 51" style="opacity: 0;">
+            <img id="image52" class="image" src="./images/52.jpg" alt="Image 52" style="opacity: 0;">
+            <img id="image53" class="image" src="./images/53.jpg" alt="Image 53" style="opacity: 0;">
+            <img id="image54" class="image" src="./images/54.jpg" alt="Image 54" style="opacity: 0;">
+            <img id="image55" class="image" src="./images/55.jpg" alt="Image 55" style="opacity: 0;">
+            <img id="image56" class="image" src="./images/56.jpg" alt="Image 56" style="opacity: 0;">
+            <img id="image57" class="image" src="./images/57.jpg" alt="Image 57" style="opacity: 0;">
+            <img id="image58" class="image" src="./images/58.jpg" alt="Image 58" style="opacity: 0;">
+            <img id="image59" class="image" src="./images/59.jpg" alt="Image 59" style="opacity: 0;">
+            <img id="image60" class="image" src="./images/60.jpg" alt="Image 60" style="opacity: 0;">
+            <img id="image63" class="image" src="./images/63.jpg" alt="Image 63" style="opacity: 0;">
+            <img id="image64" class="image" src="./images/64.jpg" alt="Image 64" style="opacity: 0;">
+            <img id="image67" class="image" src="./images/67.jpg" alt="Image 67" style="opacity: 0;">
+            <img id="image68" class="image" src="./images/68.jpg" alt="Image 68" style="opacity: 0;">
+            <img id="image71" class="image" src="./images/71.jpg" alt="Image 71" style="opacity: 0;">
+            <img id="image72" class="image" src="./images/72.jpg" alt="Image 72" style="opacity: 0;">
+            <img id="image73" class="image" src="./images/73.jpg" alt="Image 73" style="opacity: 0;">
+            <img id="image74" class="image" src="./images/74.jpg" alt="Image 74" style="opacity: 0;">
+            <img id="image75" class="image" src="./images/75.jpg" alt="Image 75" style="opacity: 0;">
+            <img id="image76" class="image" src="./images/76.jpg" alt="Image 76" style="opacity: 0;">
+            <img id="image77" class="image" src="./images/77.jpg" alt="Image 77" style="opacity: 0;">
+            <img id="image78" class="image" src="./images/78.jpg" alt="Image 78" style="opacity: 0;">
+            <img id="image79" class="image" src="./images/79.jpg" alt="Image 79" style="opacity: 0;">
+            <img id="image80" class="image" src="./images/80.jpg" alt="Image 80" style="opacity: 0;">
+        </div>
+
+        <!-- Buttons in a circular layout under the images -->
+        <div id="buttons">
+
+        
+<button onclick="showImage2()">÷.„.„</button>
+
+	<button onclick="showImage1()">÷.„.€.„</button>
+    </div>
+    </div>
+
+    <!-- Right Sidebar with Collapsible Menu -->
+    <div id="sidebar">
+<div class="title">
+   <p><a href="../index.html">«·’›Õ… «·√Ê·Ï</a></p>
+  </div>
+        <button id="collapsible4">„⁄«œ‰</button>
+        <div id="collapsible-content4">
+            <h3><a href="#" onclick="showImages(1, 2)">√Ê·Ì›Ì‰</a></h3>
+            <h3><a href="#" onclick="showImages(3, 4)">√„›Ì»Ê·</a></h3>
+            <h3><a href="#" onclick="showImages(7, 8)">»Ì—Êﬂ”«‰</a></h3>
+            <h3><a href="#" onclick="showImages(9, 10)">”«‰ÌœÌ‰</a></h3>
+            <h3><a href="#" onclick="showImages(11, 12)">€«—‰Ì </a></h3>
+            <h3><a href="#" onclick="showImages(13, 14)">ﬂ«·”Ì </a></h3>
+            <h3><a href="#" onclick="showImages(15, 16)">ﬂ·Ê—Ì </a></h3>
+            <h3><a href="#" onclick="showImages(17, 18)">ﬂÊ«— “</a></h3>
+            <h3><a href="#" onclick="showImages(19, 20)">„Ì”ﬂÊ›Ì </a></h3>
+	    <h3><a href="#" onclick="showImages(5, 6)">‰Ì›Ì·Ì‰</a></h3>
+        </div>
+	<button id="collapsible">’ŒÊ— —”Ê»Ì…</button>
+        <div id="collapsible-content">
+            <h3><a href="#" onclick="showImages(21, 22)">√—ﬂÊ“</a></h3>
+            <h3><a href="#" onclick="showImages(23, 24)">ÕÃ— —„·Ì €·ÊﬂÊ‰Ì Ì</a></h3>
+            <h3><a href="#" onclick="showImages(25, 26)">ÕÃ— —„·Ì ﬂ·”Ì</a></h3>
+            <h3><a href="#" onclick="showImages(29, 30)">ÕÃ— —„·Ì „⁄ „Ìﬂ« Ê„Ì”ﬂÊ›Ì </a></h3>            
+	    <h3><a href="#" onclick="showImages(27, 28)">ÕÃ— ÿÌ‰Ì</a></h3>
+            <h3><a href="#" onclick="showImages(35, 36)">›·”»«— ›Ì ’Œ— —”Ê»Ì</a></h3>
+            <h3><a href="#" onclick="showImages(37, 38)">ﬂÊ«— “ √—Ì‰Ì </a></h3>
+            <h3><a href="#" onclick="showImages(39, 40)">·Ì «—Ì‰Ì </a></h3>
+        </div>
+	<button id="collapsible2">’ŒÊ— ‰«—Ì…</button>
+        <div id="collapsible-content2">
+            <h3><a href="#" onclick="showImages(49, 50)">√‰œÌ“Ì </a></h3>
+	    <h3><a href="#" onclick="showImages(41, 42)">√Ê·Ì›Ì‰ »«“· </a></h3>
+            <h3><a href="#" onclick="showImages(45, 46)">√Ê·Ì›Ì‰ €«»—Ê</a></h3>
+	    <h3><a href="#" onclick="showImages(43, 44)">»«“· </a></h3>
+            <h3><a href="#" onclick="showImages(47, 48)">œÊ·Ì—Ì </a></h3>
+            <h3><a href="#" onclick="showImages(51, 52)">—ÌÊ·Ì </a></h3>
+            <h3><a href="#" onclick="showImages(53, 54)">›Ê‰Ê·Ì </a></h3>
+            <h3><a href="#" onclick="showImages(55, 56)">€«»—Ê</a></h3>
+            <h3><a href="#" onclick="showImages(57, 58)">€—«‰ÊœÌÊ—Ì </a></h3>
+            <h3><a href="#" onclick="showImages(59, 60)">€—«‰Ì </a></h3>
+        </div>
+	<button id="collapsible3">’ŒÊ— „ ÕÊ·…</button>
+        <div id="collapsible-content3">
+            <h3><a href="#" onclick="showImages(63, 64)">√„›Ì»Ê·Ì </a></h3>
+            <h3><a href="#" onclick="showImages(67, 68)">‘Ì”  ” Ê—Ê·Ì </a></h3>
+            <h3><a href="#" onclick="showImages(71, 72)">€«—‰Ì  „Ìﬂ«‘Ì” </a></h3>
+            <h3><a href="#" onclick="showImages(73, 74)">ﬂ« «ﬂ·«“Ì </a></h3>
+            <h3><a href="#" onclick="showImages(75, 76)">ﬂÌ«‰Ì  ‰«Ì”</a></h3>
+            <h3><a href="#" onclick="showImages(77, 78)">„Ì·Ê‰Ì </a></h3>
+            <h3><a href="#" onclick="showImages(79, 80)">‰«Ì” €—«‰Ì Ì</a></h3>
+        </div>
+    </div>
+
+    <script>
+        let currentPair = []; // Default pair to show
+
+        function showImages(img1, img2) {
+            // Set current pair of images to show
+            currentPair = [img1, img2];
+            updateImages();
+        }
+
+        function showImage1() {
+            document.getElementById(`image${currentPair[0]}`).style.opacity = '1';
+            document.getElementById(`image${currentPair[1]}`).style.opacity = '0';
+        }
+
+        function showImage2() {
+            document.getElementById(`image${currentPair[0]}`).style.opacity = '0';
+            document.getElementById(`image${currentPair[1]}`).style.opacity = '1';
+        }
+
+        function updateImages() {
+            // Hide all images first
+            const images = document.querySelectorAll('.image');
+            images.forEach(img => img.style.opacity = '0');
+
+            // Show only the current pair
+            document.getElementById(`image${currentPair[0]}`).style.opacity = '1';
+            document.getElementById(`image${currentPair[1]}`).style.opacity = '0';
+        }
+
+        // Toggle collapsible menu
+        document.getElementById("collapsible").addEventListener("click", function() {
+            var content = document.getElementById("collapsible-content");
+            content.style.display = content.style.display === "block" ? "none" : "block";
+        });
+	// Toggle collapsible menu
+        document.getElementById("collapsible2").addEventListener("click", function() {
+            var content = document.getElementById("collapsible-content2");
+            content.style.display = content.style.display === "block" ? "none" : "block";
+        });
+	// Toggle collapsible menu
+        document.getElementById("collapsible3").addEventListener("click", function() {
+            var content = document.getElementById("collapsible-content3");
+            content.style.display = content.style.display === "block" ? "none" : "block";
+        });
+	// Toggle collapsible menu
+        document.getElementById("collapsible4").addEventListener("click", function() {
+            var content = document.getElementById("collapsible-content4");
+            content.style.display = content.style.display === "block" ? "none" : "block";
+        });
+        // Initialize by showing the first pair of images
+        updateImages();
+    </script>
+</body>
+</html>

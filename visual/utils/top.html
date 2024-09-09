@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+<title></title>
+<style>
+body {
+      font-family: Arial, sans-serif; /* Use Arial font for Arabic text */
+      direction: rtl; /* Set text direction to right-to-left */
+      margin: 20px;
+    }
+h1 { text-align: center; line-height: 15; margin: 15em; }
+ul { text-align: center; }
+ul li { list-style: none; display: inline-block; margin: 14px; }
+a { color: #000; }
+a#fileapi2 { display: none; color: #bbbbbb; }
+</style>
+</head>
+<body>
+
+  <h2>البنية ثلاثية الأبعاد للبلورات.</h2>
+<h4>يمكن تحميل ملف البنية ثلاثية الأبعاد لأي معدن للتعرف على محاوره وزواياه ونظامه البلوري.</h4>
+<ul>
+    <li><a href="fileapi2.html" target="main" id="fileapi2">ملف CIF جديد</a></li>
+    <li><a href="../engines/jsmol/" target="main">JSmol</a></li>
+    <li><a href="../engines/chemdoodle/" target="main">ChemDoodleWeb</a></li>
+
+    <li><a href="../engines/player.html/player.html" target="main">Player.html</a></li>
+</ul>
+<script type="text/javascript">
+if (window.File && window.FileReader && window.FileList && window.Blob) {
+    var lk = document.getElementById('fileapi2');
+    lk.style.display = 'block';
+}
+</script>
+</body>
+</html>

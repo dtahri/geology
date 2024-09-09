@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>«·Œ—Ìÿ… «·ÿ»Ê€—«›Ì…</title>
+    <!-- Include Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            font-family: Arial, sans-serif;
+            direction: rtl; /* Set text direction to right-to-left */
+            margin: 0; /* Remove default margin */
+        }
+        .header {
+            padding: 15px;
+
+            text-align: right; /* Align link to the right */
+            text-decoration: none;
+        }
+        .container {
+            display: flex;
+            flex: 1; /* Takes remaining vertical space */
+        }
+        .sidebar {
+            width: 200px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-left: 1px solid #ccc; /* Align border to left for RTL */
+            text-align: right; /* Align text to the right */
+        }
+        .map-container {
+            flex: 1;
+            height: 90vh;
+            position: relative;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        .thumbnail {
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .thumbnail img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+  <!-- Header with link to the first page -->
+  <div class="header">
+    <a href="../index.html">«·’›Õ… «·√Ê·Ï</a>
+  </div>
+
+  <!-- Container for sidebar and map -->
+  <div class="container">
+    <!-- Sidebar with map options -->
+    <div class="sidebar">
+        <h3>«Œ — Œ—Ìÿ…</h3>
+        <div class="thumbnail" onclick="switchMap('./images/ni31-10.jpg')">
+            <p>«·√€Ê«ÿ</p>
+        </div>
+        <div class="thumbnail" onclick="switchMap('./images/ni31-6.jpg')">
+            <p>¬›·Ê</p>
+        </div>
+        <div class="thumbnail" onclick="switchMap('./images/ni31-5.jpg')">
+           <p>”⁄Ìœ…</p>
+        </div>
+	<div class="thumbnail" onclick="switchMap('./images/ni31-15.jpg')">
+           <p>€—œ«Ì…</p>
+        </div>
+	<div class="thumbnail" onclick="switchMap('./images/ni31-7.jpg')">
+           <p>«·Ã·›…</p>
+        </div>
+	<div class="thumbnail" onclick="switchMap('./images/ni31-2.jpg')">
+           <p>ﬁ’— «·»Œ«—Ì</p>
+        </div>
+    </div>
+
+    <!-- Main map container -->
+    <div class="map-container">
+        <div id="map"></div>
+    </div>
+  </div>
+
+  <!-- Include Leaflet JavaScript -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+      // Initialize the Leaflet map
+      var map = L.map('map', {
+          minZoom: -2,
+          maxZoom: 2,
+          center: [0, 0],
+          crs: L.CRS.Simple
+      });
+
+      // Default map settings
+      var imageWidth = 2000; // Width of the image in pixels
+      var imageHeight = 1500; // Height of the image in pixels
+      var currentImageOverlay;
+
+      // Function to switch the map
+      function switchMap(imageUrl) {
+          if (currentImageOverlay) {
+              map.removeLayer(currentImageOverlay); // Remove the current image overlay
+          }
+          var bounds = [[0, 0], [imageHeight, imageWidth]];
+          currentImageOverlay = L.imageOverlay(imageUrl, bounds);
+          currentImageOverlay.addTo(map);
+          map.fitBounds(bounds);
+      }
+
+      // Initialize with the first map
+      switchMap('./images/ni31-10.jpg');
+  </script>
+
+</body>
+</html>

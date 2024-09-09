@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <style>
+        #ready, #loader {
+            display: none; 
+            position: absolute; 
+            left: 0; 
+            top: 0; 
+            right: 0; 
+            bottom: 0; 
+            height: auto; 
+            margin: 100px; 
+            text-align: center;
+        }
+        p {
+            line-height: 3em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="ready">
+        <p>يرجى اختيار أداة المعاينة من القائمة أعلاه.</p>
+    </div>
+    <div id="loader">
+        <input type="file" id="fileapi2" />
+        <p>تتم معالجة الملفات آليا في المتصفح ولا يمكن استخدام روابط بعيدة.</p>
+    </div>
+
+    <script type="text/javascript">
+        var ready = document.getElementById('ready'), 
+            loader = document.getElementById('loader');
+
+        function accomodate(result) {
+            window.parent.cifdata = result.replace(/"/g, '\x22').replace(/'/g, '\x27');
+            window.parent.playerdata = window.parent.cifdata;
+        }
+
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+            loader.style.display = 'block';
+            var fileapi2 = document.getElementById('fileapi2');
+            var reader = new FileReader();
+            fileapi2.onchange = function() {
+                if (!this.files[0] || !this.files[0].size) {
+                    return alert("خطأ: لا يمكن قراءة الملف (غير متاح؟)");
+                }
+                reader.readAsText(this.files[0]);
+            }
+            reader.onloadend = function(event) {
+                window.accomodate(event.target.result);
+                ready.style.display = 'block';
+                loader.style.display = 'none';
+            }
+        } else {
+            ready.style.display = 'block';
+        }
+
+        var xmlhttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4) {
+                if (xmlhttp.status == 200) {
+                    window.accomodate(xmlhttp.responseText);
+                } else {
+                    alert("خطأ: لا يمكن تحميل بيانات المعدن!");
+                }
+            }
+        }
+        if (window.location.protocol.indexOf('http') === 0) {
+            xmlhttp.open("GET", '../data/adsorption.cif');
+            xmlhttp.setRequestHeader("If-Modified-Since", "Sat, 1 Jan 2000 00:00:00 GMT");
+            xmlhttp.send();  // Changed from 1 to an empty send()
+        } else {
+            alert('خطأ: يجب أن تكون هذه الصفحة مزودة من خادم ويب');
+        }
+    </script>
+
+</body>
+
+</html>

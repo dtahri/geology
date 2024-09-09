@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="U+075x">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ÇáãŞØÚ ÇáØÈæÛÑÇİí</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif; /* Use Arial font for Arabic text */
+      direction: rtl; /* Set text direction to right-to-left */
+      margin: 20px;
+    }
+   #map, #chart {
+      width: calc(100% - 400px); /* Same width as chart */
+      margin: 20px auto; /* Center with auto margins */
+    }
+    #map {
+      height: 400px; /* Define the height of the map */
+    }
+    #chart {
+      height: 400px; /* Define the height of the chart */
+    }   
+
+    
+.header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .header img {
+      width: 100px; /* Set width for institution icon */
+      height: auto; /* Maintain aspect ratio */
+    }
+    .header .title {
+      font-size: 1em; /* Adjust font size for the title */
+      margin-right: 10px; /* Add some space between title and icon */
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+   <a href="../index.html">ÇáÕİÍÉ ÇáÃæáì</a>
+  </div>
+  <h2>ÇáãŞØÚ ÇáØÈæÛÑÇİí Èíä äŞØÊíä "Ã" æ "È".</h2>
+  <h4>ÍÏÏ ÏÇÎá ÇáÎÑíØÉ ãæÖÚ ÇáäŞØÊíä "Ã" æ"È" ÍÊì íÙåÑ ÇáãŞØÚ. íãßä ÊÍÑíß ÇáäŞØÊíä¡ æíãßä ÃíÖÇ ÇáÖÛØ Úáì ãÓÍ áÅÚÇÏÉ ÇáÊÚííä.</h4>
+  <div id="map"></div>
+ <canvas id="chart"></canvas>
+
+  <button id="reset">ãÓÍ</button>
+
+
+  <!-- Include Leaflet JS and Chart.js -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>

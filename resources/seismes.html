@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ar">
+    <head>
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="./resources/ol.css">
+        <link rel="stylesheet" href="./resources/ol3-layerswitcher.css">
+        <link rel="stylesheet" href="./resources/qgis2web.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+        <style>
+            #map, #map2 {
+                height: 500px;
+                width: 1000px;
+                margin: 20px auto;
+            }
+            .title {
+                text-align: right;
+                font-size: 20px;
+                margin-top: 0px;
+		padding: 5px;
+                font-family: Arial, sans-serif;
+		direction: rtl;
+            }
+.title2 {
+                text-align: right;
+                font-size: 13px;
+                margin-top: 0px;
+		padding: 5px;
+                font-family: Arial, sans-serif;
+		direction: rtl;
+            }
+        </style>
+                
+        <title>«·‰‘«ÿ «·“·“«·Ì</title>
+    </head>
+    <body>
+<div class="title">
+   <p><a href="../index.html">«·’›Õ… «·√Ê·Ï</a></p>
+  </div>
+        <div id="map-container">
+            <!-- Title for the first map (Leaflet) -->
+            <div class="title">«·‰‘«ÿ «·“·“«·Ì «·⁄«·„Ì „‰ 2024/01/01 ≈·Ï 2024/07/30 »‘œ…  ›Êﬁ 2 («·Õœ «·√ﬁ’Ï ··‰ﬁ«ÿ ⁄·Ï «·Œ—Ìÿ… 12000).</div>
+<div class="title2"><p>(ﬁœ Ì” €—ﬁ  Õ„Ì· ﬂ· »Ì«‰«  «·Œ—Ìÿ… »⁄÷ «··ÕŸ« )</p></div>
+            <!-- First map using Leaflet -->
+            <div id="map2"></div>
+
+            <!-- Title for the second map (OpenLayers) -->
+            <div class="title">√Œÿ— «·“·«“· «· Ì ÷—»  «·Ã“«∆— ›Ì «·„«÷Ì.</div>
+            <!-- Second map using OpenLayers -->
+            <div id="map">
+                <div id="popup" class="ol-popup">
+                    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                    <div id="popup-content"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scripts for the first map (Leaflet) -->
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script>
+            const map2 = L.map('map2').setView([0, 0], 2); // First map (Leaflet)
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map2);
+
+            // Fetch earthquake data for the past two years with a minimum magnitude of 2
+            fetch('https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2024-01-01&endtime=2024-07-30&minmagnitude=2&limit=12000')
+                .then(response => response.json())
+                .then(data => {
+                    data.features.forEach(feature => {
+                        const coords = feature.geometry.coordinates;
+                        const magnitude = feature.properties.mag;
+                        const place = feature.properties.place;
+                        const date = new Date(feature.properties.time).toLocaleDateString();
+
+                        L.circle([coords[1], coords[0]], {
+                            color: 'red',
+                            fillColor: '#f03',
+                            fillOpacity: 0.5,
+                            radius: magnitude * 10000
+                        }).addTo(map2)
+                          .bindPopup(`<b>${place}</b><br>Magnitude: ${magnitude}<br>Date: ${date}`);
+                    });
+                })
+                .catch(error => console.error('Error fetching earthquake data:', error));
+
+            // Fetch tectonic plate boundaries data
+            fetch('https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json')
+                .then(response => response.json())
+                .then(plateData => {
+                    L.geoJSON(plateData, {
+                        style: {
+                            color: 'blue',
+                            weight: 2
+                        }
+                    }).addTo(map2);
+                })
+                .catch(error => console.error('Error fetching tectonic plate data:', error));
+        </script>
+
+        <!-- Scripts for the second map (OpenLayers) -->
+        <script src="resources/qgis2web_expressions.js"></script>
+        <script src="resources/polyfills.js"></script>
+        <script src="./resources/functions.js"></script>
+        <script src="./resources/ol.js"></script>
+        <script src="./resources/ol3-layerswitcher.js"></script>
+        <script src="layers/DZA_adm1_0.js"></script>
+        <script src="layers/1_1.js"></script>
+        <script src="styles/DZA_adm1_0_style.js"></script>
+        <script src="styles/1_1_style.js"></script>
+        <script src="./layers/layers.js" type="text/javascript"></script> 
+        <script src="./resources/qgis2web.js"></script>
+        <script src="./resources/Autolinker.min.js"></script>
+    </body>
+</html>
