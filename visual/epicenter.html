@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> ⁄ÌÌ‰ „—ﬂ“ “·“«·</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            direction: rtl; /* Set direction to right-to-left */
+        }
+
+        .header {
+            width: 100%;
+            text-align: right;
+            padding: 10px;
+        }
+
+        #map {
+            width: 70%;
+            height: 600px;
+            margin: 20px 0;
+        }
+
+        #controls {
+            width: 70%;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #controls select, #controls input, #controls button {
+            margin: 10px 5px;
+            padding: 5px;
+        }
+
+        #stationSelector {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        #stationSelector select, #stationSelector button {
+            margin: 10px 5px;
+            padding: 5px;
+        }
+
+        #chartContainer {
+            width: 70%;
+            margin-top: 20px;
+        }
+
+        /* Styles for popup image */
+        #popupImage {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            border: 2px solid black;
+            background-color: white;
+        }
+
+        #popupImage img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        #closeButton {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            color: red;
+        }
+	#popupChart {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            width: 70%;
+            height: 400px;
+            background-color: white;
+            border: 2px solid black;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+        }
+
+        #closeChartButton {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            color: red;
+        }
+	</style>
+</head>
+<body>
+    <!-- Header with link -->
+    <div class="header">
+        <a href="../index.html">«·’›Õ… «·√Ê·Ï</a>
+    </div>
+    <h1 style="text-align: right;"> ⁄ÌÌ‰ „—ﬂ“ “·“«·</h1>
+    <div id="map"></div>
+    <div id="controls">
+        <label for="stationSelect">«Œ — «·„Õÿ…:</label>
+        <select id="stationSelect"></select>
+        <label for="distanceInput">√œŒ· «·„”«›… (ﬂ„):</label>
+        <input type="number" id="distanceInput" min="0" step="0.1" />
+        <button onclick="drawCircle()">—”„ œ«∆—…</button>
+        <button onclick="resetMap()">„”Õ</button>
+    </div>
+
+    <!-- Additional Station Selector for Displaying Marker -->
+    <div id="stationSelector">
+        <label for="showStationSelect">«Œ — œÊ·… «·“·“«·:</label>
+        <select id="showStationSelect"></select>
+        <button onclick="showStationMarker()">√ŸÂ— „—ﬂ“ «·“·“«·</button>
+        <button onclick="resetShownMarkers()">„”Õ</button> <!-- New Reset Button -->
+	<br>
+        <button onclick="showChart()">„‰Õ‰Ì«  «·„ÊÃ«  «·“·“«·Ì…</button>
+    </div>
+
+    <!-- Chart Popup Modal -->
+    <div id="popupChart">
+        <span id="closeChartButton" onclick="closeChart()">X</span>
+        <canvas id="waveChart"></canvas>
+    </div>
+
+    <!-- Popup Image Container -->
+    <div id="popupImage">
+        <span id="closeButton" onclick="closeImage()">X</span>
+        <img id="seismogramImage" src="" alt="’Ê—… «·”Ì”„Ê€—«„">
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map centered on India
+        const map = L.map('map').setView([17.49651937, -20.86664620], 2.4); // Center the map on India
+
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Predefined station data for India with specific images
+        const stations = [
+            { name: "„Ê„»«”«° ﬂÊ‰€Ê", lat: 1.36701269, lon: 29.02620704, pTime: 10, sTime: 19, image: "./plots/27.jpg" },
+	    { name: "€Ê„»«—Ì° ﬂÊ‰€Ê", lat: 2.70666173, lon: 29.04297273, pTime: 5, sTime: 12, image: "./plots/26.jpg" },
+	    { name: "»«ﬂÊ° ﬂÊ‰€Ê", lat: 2.30608171, lon: 30.09791619, pTime: 10, sTime: 19, image: "./plots/28.jpg" },
+	    { name: "„»Ì«°  ‰“«‰Ì«", lat: -8.90183043, lon: 33.45531979, pTime: 25, sTime: 33, image: "./plots/30.jpg" },
+	    { name: " Ê‰œÊ„«°  ‰“«‰Ì«", lat: -9.29763044, lon: 32.77408513, pTime: 20, sTime: 25, image: "./plots/29.jpg" },
+	    { name: "·«ÌÌ·«°  ‰“«‰Ì«", lat: -8.58152078, lon: 32.04357096, pTime: 25, sTime: 33, image: "./plots/31.jpg" },
+	    { name: "„Ê„»«Ì° «·Â‰œ", lat: 19.0760, lon: 72.8777, pTime: 13, sTime: 33, image: "./plots/1.jpg" },
+            { name: "≈‰œÊ—° «·Â‰œ", lat: 22.984386, lon: 76.055233, pTime: 20.7, sTime: 60.5, image: "./plots/3.jpg" },
+            { name: "”Ê·«»Ê—° «·Â‰œ", lat: 17.695518, lon: 75.906818, pTime: 15.6, sTime: 42.6, image: "./plots/2.jpg" },
+	    { name: "√‰ Ì”«°  —ﬂÌ«", lat: 39.22935130, lon: 25.99045138, pTime: 17, sTime: 29, image: "./plots/23.jpg" },
+            { name: "»«·«ÃÌ«° «·ÌÊ‰«‰", lat: 40.87140003, lon: 25.88312770, pTime: 15, sTime: 25, image: "./plots/24.jpg" },
+            { name: "”«·Ê‰Ìﬂ° «·ÌÊ‰«‰", lat: 40.65505399, lon: 22.94940416, pTime: 20, sTime: 40, image: "./plots/25.jpg" },
+            { name: "»Ê —Ì·Ê°  ‘Ì·Ì", lat: -26.42617609, lon: -69.49107658, pTime: 7.5, sTime: 16.5, image: "./plots/6.jpg" },
+            { name: "ﬂÊ»Ì«»Ê°  ‘Ì·Ì", lat: -27.36675722, lon: -70.34251701, pTime: 6, sTime: 12, image: "./plots/5.jpg" },
+            { name: "»Ê— Ê ›·«„‰ﬂÊ°  ‘Ì·Ì", lat: -26.57365677, lon: -70.68858635, pTime: 5.3, sTime: 10.3, image: "./plots/4.jpg" },
+            { name: "»Ê€Ê «° ﬂÊ·Ê„»Ì«", lat: 4.71285779, lon: -74.07514730, pTime: 4, sTime: 19.8, image: "./plots/8.jpg" },
+            { name: "ﬂÊÌ»œÊ° ﬂÊ·Ê„»Ì«", lat: 5.70300349, lon: -76.65693441, pTime: 5.9, sTime: 22.9, image: "./plots/9.jpg" },
+            { name: "»ÊÌ‰«›‰ Ê—«° ﬂÊ·Ê„»Ì«", lat: 3.88025080, lon: -77.02497641, pTime: 6, sTime: 25.2, image: "./plots/10.jpg" },
+            { name: "‰ÌÌ›«° ﬂÊ·Ê„»Ì«", lat: 2.93162290, lon: -75.27815023, pTime: 6.5, sTime: 26.1, image: "./plots/7.jpg" },
+            { name: "”«‰ ›Ì”‰ Ì ÌÊÃÊœÊÌ° «·„ﬂ”Ìﬂ", lat: 16.06715948, lon: -96.61497274, pTime: 5, sTime: 9, image: "./plots/12.jpg" },
+            { name: "»Ê— Ê ≈”ﬂ‰œÌœÊ° «·„ﬂ”Ìﬂ", lat: 15.87366122, lon: -97.07454860, pTime: 2, sTime: 4, image: "./plots/13.jpg" },
+            { name: "”«‰ « ﬂ« «—Ì‰« ÃÊÌﬂÌ·«° «·„ﬂ”Ìﬂ", lat: 16.23959184, lon: -97.29906567, pTime: 4, sTime: 8, image: "./plots/11.jpg" },
+	    { name: "„„›Ì”° «·Ê·«Ì«  «·„ Õœ… «·√„—ÌﬂÌ…", lat: 35.14968156, lon: -90.04170219, pTime: 9, sTime: 21, image: "./plots/15.jpg" },
+	    { name: "‰ÌÊ»Ê— ° «·Ê·«Ì«  «·„ Õœ… «·√„—ÌﬂÌ…", lat: 35.61322040, lon: -91.26667778, pTime: 7, sTime: 10, image: "./plots/14.jpg" },
+	    { name: "ÂÊ  ”»—Ì‰€“° «·Ê·«Ì«  «·„ Õœ… «·√„—ÌﬂÌ…", lat: 34.51183845, lon: -93.06418981, pTime: 11, sTime: 29, image: "./plots/16.jpg" },
+	    { name: "ÂÌ€ÊÌ—« œÌ “«—«€Ê“«° «·„ﬂ”Ìﬂ", lat: 25.97167124, lon: -109.29939294, pTime: 12, sTime: 22.5, image: "./plots/18.jpg" },
+	    { name: "√€Ê« ›Ì—œÌ° «·„ﬂ”Ìﬂ", lat: 25.52077691, lon: -111.08574451, pTime: 15, sTime: 27, image: "./plots/19.jpg" },
+	    { name: "·«»«“° «·„ﬂ”Ìﬂ", lat: 24.13977463, lon: -110.31462077, pTime: 16, sTime: 28.5, image: "./plots/17.jpg" },
+	    { name: " Ì‰€Ê „«—Ì«° »Ì—Ê", lat: -9.29001392, lon: -76.00623362, pTime: 15, sTime: 33, image: "./plots/21.jpg" },
+	    { name: "ÂÊ«—„Ì° »Ì—Ê", lat: -10.06595410, lon: -78.16108824, pTime: 5, sTime: 14.3, image: "./plots/22.jpg" },
+	    { name: "·Ì„«° »Ì—Ê", lat: -12.03389083, lon: -77.04963214, pTime: 18, sTime: 38, image: "./plots/20.jpg" }
+        ];
+
+        // Separate list for stations related to the "√ŸÂ—" button
+        const stationsEpi = [
+            { name: "ﬂÊ‰€Ê", lat: 2.12932056, lon: 29.30141344 },
+            { name: " ‰“«‰Ì«", lat: -8.84657605, lon: 32.72374405 },
+            { name: " —ﬂÌ«", lat: 40.12921423, lon: 25.20984117 },
+	    { name: "«·„ﬂ”Ìﬂ-Ã‰Ê»", lat: 16.03526040, lon: -96.98891112 },
+            { name: "«·„ﬂ”Ìﬂ-‘„«·", lat: 25.21197429, lon: -109.92548634 },
+	    { name: "«·Â‰œ", lat: 19.77989863, lon: 74.68848178 },
+	    { name: " ‘Ì·Ì", lat: -26.80475830, lon: -70.32974088 },
+            { name: "»Ì—Ê", lat: -10.25526609, lon: -77.32909499 },
+            { name: "«·Ê·«Ì«  «·„ Õœ… «·√„—ÌﬂÌ…", lat: 35.34085579, lon: -91.35248032 },
+            { name: "ﬂÊ·Ê„»Ì«", lat: 4.68879149, lon: -75.50000909 }
+        ];
+
+        // Array to keep track of shown markers
+        const shownMarkers = [];
+
+        // Populate map with markers and fill dropdowns
+        stations.forEach(station => {
+            const marker = L.marker([station.lat, station.lon])
+                .addTo(map)
+                .bindPopup(`<b>${station.name}</b><br><a href="#" onclick="showSeismogram('${station.image}')">”Ì”„Ê€—«„</a>`);
+
+            const option1 = document.createElement('option');
+            option1.text = station.name;
+            option1.value = JSON.stringify({ lat: station.lat, lon: station.lon });
+            document.getElementById('stationSelect').add(option1);
+        });
+
+        // Populate dropdown for "√ŸÂ—" button with stationsEpi data
+        stationsEpi.forEach(station => {
+            const option2 = document.createElement('option');
+            option2.text = station.name;
+            option2.value = JSON.stringify({ lat: station.lat, lon: station.lon });
+            document.getElementById('showStationSelect').add(option2);
+        });
+
+        // Function to show seismogram image
+        function showSeismogram(image) {
+            document.getElementById('seismogramImage').src = image; // Set the specific image for the station
+            document.getElementById('popupImage').style.display = 'block'; // Show the popup
+        }
+
+        // Function to close the image popup
+        function closeImage() {
+            document.getElementById('popupImage').style.display = 'none'; // Hide the popup
+        }
+
+        // Draw circles around selected markers
+        const drawnCircles = [];
+
+        function drawCircle() {
+            const stationData = JSON.parse(document.getElementById('stationSelect').value);
+            const distance = parseFloat(document.getElementById('distanceInput').value);
+
+            if (!stationData || isNaN(distance)) {
+                alert('Ì—ÃÏ «Œ Ì«— „Õÿ… Ê≈œŒ«· „”«›… ’ÕÌÕ….');
+                return;
+            }
+
+            const circle = L.circle([stationData.lat, stationData.lon], {
+                radius: distance * 1000,
+                color: 'red'
+            }).addTo(map);
+
+            drawnCircles.push(circle);
+        }
+
+        // Reset map by removing circles
+        function resetMap() {
+            drawnCircles.forEach(circle => map.removeLayer(circle));
+            drawnCircles.length = 0;
+        }
+
+        // Function to show selected station marker for stationsEpi
+        function showStationMarker() {
+            const selectedData = JSON.parse(document.getElementById('showStationSelect').value);
+
+            if (!selectedData) {
+                alert('Ì—ÃÏ «Œ Ì«— „Õÿ… ·≈ŸÂ«—Â«.');
+                return;
+            }
+
+            const marker = L.marker([selectedData.lat, selectedData.lon], {icon: L.icon({iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34]})})
+                .addTo(map)
+                .bindPopup(`<b>${stationsEpi.find(station => station.lat === selectedData.lat && station.lon === selectedData.lon).name}</b>`)
+                .openPopup();
+
+            shownMarkers.push(marker);
+        }
+
+        // Function to reset shown markers
+        function resetShownMarkers() {
+            shownMarkers.forEach(marker => map.removeLayer(marker));
+            shownMarkers.length = 0;
+        }
+	
+	// Show chart in modal
+        function showChart() {
+            document.getElementById('popupChart').style.display = 'block';
+        }
+
+        // Close chart modal
+        function closeChart() {
+            document.getElementById('popupChart').style.display = 'none';
+        }
+
+        // Chart.js code to create the travel time chart
+        const ctx = document.getElementById('waveChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                datasets: [
+                    {
+                        label: '“„‰ «‰ ﬁ«· «·„ÊÃ… P',
+                        data: [
+                            {x: 0, y: 0},
+                            {x: 1515.79, y: 200}
+                        ],
+                        borderColor: 'blue',
+                        fill: false
+                    },
+                    {
+                        label: '“„‰ «‰ ﬁ«· «·„ÊÃ… S',
+                        data: [
+                            {x: 0, y: 0},
+                            {x: 821.053, y: 200}
+                        ],
+                        borderColor: 'green',
+                        fill: false
+                    },
+                    {
+                        label: '«·›«’· «·“„‰Ì S-P',
+                        data: [
+                            {x: 0, y: 0},
+                            {x: 1800, y: 186.498}
+                        ],
+                        borderColor: 'red',
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom',
+                        title: {
+                            display: true,
+                            text: '«·„”«›… (ﬂ„)'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: '«·Êﬁ  (À«‰Ì…)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
