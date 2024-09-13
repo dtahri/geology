@@ -41,10 +41,15 @@ function interpolatePoints(pointB, pointA, numPoints = 10) {
   return points;
 }
 
-// Function to calculate distances for X-axis
-function getDistancesForXAxis(totalDistance, numPoints = 10) {
-  const step = totalDistance / (numPoints - 1); // Distance between each point
-  const distances = Array.from({ length: numPoints }, (_, i) => Math.round(i * step));
+// Function to calculate cumulative distances for X-axis
+function getDistancesForXAxis(interpolatedPoints) {
+  let distances = [0]; // Start with 0 for the first point
+  for (let i = 1; i < interpolatedPoints.length; i++) {
+    const prevPoint = interpolatedPoints[i - 1];
+    const currPoint = interpolatedPoints[i];
+    const distance = map.distance(prevPoint, currPoint); // Distance between consecutive points
+    distances.push(Math.round(distances[i - 1] + distance)); // Cumulative distance
+  }
   return distances;
 }
 
@@ -62,9 +67,7 @@ async function generateProfile(pointB, pointA) {
     if (data.results) {
       const elevations = data.results.map(result => result.elevation);
 
-      // Calculate the total distance between points A and B
-      const totalDistance = map.distance(pointB, pointA);
-      const distances = getDistancesForXAxis(totalDistance); // Get evenly spaced distances for the X-axis
+      const distances = getDistancesForXAxis(interpolatedPoints); // Get cumulative distances for the X-axis
 
       plotProfile(distances, elevations); // Plot the elevation profile
     } else {
@@ -74,6 +77,7 @@ async function generateProfile(pointB, pointA) {
     console.error("Error fetching data from Open-Elevation: ", error);
   }
 }
+
 
 // Function to plot the profile using Chart.js
 function plotProfile(distances, elevations) {
@@ -88,7 +92,7 @@ function plotProfile(distances, elevations) {
   chartInstance = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: distances, // Distances between points for X-axis
+      labels: distances, // Use cumulative distances between points for X-axis
       datasets: [{
         label: 'الارتفاع (م)',
         data: elevations,
@@ -102,12 +106,10 @@ function plotProfile(distances, elevations) {
           display: true,
           title: { display: true, text: 'المسافة (م)', font: { size: 16 } },
           ticks: {
-            callback: function(value) {
-              return Math.round(value); // Round x-axis values
-            },
-            font: { size: 12 } // Make x-axis labels bigger
+            font: { size: 12 }, // Make x-axis labels bigger
+            autoSkip: false // Ensure all labels are shown
           },
-          reverse: true
+          reverse: true // Reverse the x-axis direction
         },
         y: {
           display: true,
@@ -125,7 +127,7 @@ function plotProfile(distances, elevations) {
               content: ['أ'],
               position: 'start',
               font: { size: 18 },
-              xValue: 0, // Position on X-axis
+              xValue: distances[0], // Position on X-axis for point A
               yValue: Math.max(...elevations), // Top Y-axis value
               textAlign: 'left'
             },
@@ -134,7 +136,7 @@ function plotProfile(distances, elevations) {
               content: ['ب'],
               position: 'start',
               font: { size: 18 },
-              xValue: distances[distances.length - 1], // End on X-axis
+              xValue: distances[distances.length - 1], // End on X-axis for point B
               yValue: Math.max(...elevations), // Top Y-axis value
               textAlign: 'right'
             }
@@ -148,6 +150,8 @@ function plotProfile(distances, elevations) {
   ctx.font = "14px Arial";
   ctx.fillText("مقياس", 30, ctx.canvas.height - 20); // Position for the scale text
 }
+
+
 
 // Function to update the profile and polyline when markers are moved
 function updateProfile() {
