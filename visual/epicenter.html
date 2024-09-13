@@ -3,7 +3,7 @@
 <head>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ÊÚííä ãÑßÒ ÒáÒÇá</title>
+    <title>ØªØ¹ÙŠÙŠÙ† Ù…Ø±ÙƒØ² Ø²Ù„Ø²Ø§Ù„</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -106,27 +106,27 @@
 <body>
     <!-- Header with link -->
     <div class="header">
-        <a href="../index.html">ÇáÕİÍÉ ÇáÃæáì</a>
+        <a href="../">Ø§Ù„ØµÙØ­Ø© Ø§Ù„Ø£ÙˆÙ„Ù‰</a>
     </div>
-    <h1 style="text-align: right;">ÊÚííä ãÑßÒ ÒáÒÇá</h1>
+    <h1 style="text-align: right;">ØªØ¹ÙŠÙŠÙ† Ù…Ø±ÙƒØ² Ø²Ù„Ø²Ø§Ù„</h1>
     <div id="map"></div>
     <div id="controls">
-        <label for="stationSelect">ÇÎÊÑ ÇáãÍØÉ:</label>
+        <label for="stationSelect">Ø§Ø®ØªØ± Ø§Ù„Ù…Ø­Ø·Ø©:</label>
         <select id="stationSelect"></select>
-        <label for="distanceInput">ÃÏÎá ÇáãÓÇİÉ (ßã):</label>
+        <label for="distanceInput">Ø£Ø¯Ø®Ù„ Ø§Ù„Ù…Ø³Ø§ÙØ© (ÙƒÙ…):</label>
         <input type="number" id="distanceInput" min="0" step="0.1" />
-        <button onclick="drawCircle()">ÑÓã ÏÇÆÑÉ</button>
-        <button onclick="resetMap()">ãÓÍ</button>
+        <button onclick="drawCircle()">Ø±Ø³Ù… Ø¯Ø§Ø¦Ø±Ø©</button>
+        <button onclick="resetMap()">Ù…Ø³Ø­</button>
     </div>
 
     <!-- Additional Station Selector for Displaying Marker -->
     <div id="stationSelector">
-        <label for="showStationSelect">ÇÎÊÑ ÏæáÉ ÇáÒáÒÇá:</label>
+        <label for="showStationSelect">Ø§Ø®ØªØ± Ø¯ÙˆÙ„Ø© Ø§Ù„Ø²Ù„Ø²Ø§Ù„:</label>
         <select id="showStationSelect"></select>
-        <button onclick="showStationMarker()">ÃÙåÑ ãÑßÒ ÇáÒáÒÇá</button>
-        <button onclick="resetShownMarkers()">ãÓÍ</button> <!-- New Reset Button -->
+        <button onclick="showStationMarker()">Ø£Ø¸Ù‡Ø± Ù…Ø±ÙƒØ² Ø§Ù„Ø²Ù„Ø²Ø§Ù„</button>
+        <button onclick="resetShownMarkers()">Ù…Ø³Ø­</button> <!-- New Reset Button -->
 	<br>
-        <button onclick="showChart()">ãäÍäíÇÊ ÇáãæÌÇÊ ÇáÒáÒÇáíÉ</button>
+        <button onclick="showChart()">Ù…Ù†Ø­Ù†ÙŠØ§Øª Ø§Ù„Ù…ÙˆØ¬Ø§Øª Ø§Ù„Ø²Ù„Ø²Ø§Ù„ÙŠØ©</button>
     </div>
 
     <!-- Chart Popup Modal -->
@@ -138,7 +138,7 @@
     <!-- Popup Image Container -->
     <div id="popupImage">
         <span id="closeButton" onclick="closeImage()">X</span>
-        <img id="seismogramImage" src="" alt="ÕæÑÉ ÇáÓíÓãæÛÑÇã">
+        <img id="seismogramImage" src="" alt="ØµÙˆØ±Ø© Ø§Ù„Ø³ÙŠØ³Ù…ÙˆØºØ±Ø§Ù…">
     </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -149,56 +149,56 @@
         // Add OpenStreetMap tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 18,
-            attribution: '© OpenStreetMap contributors'
+            attribution: 'Â© OpenStreetMap contributors'
         }).addTo(map);
 
         // Predefined station data for India with specific images
         const stations = [
-            { name: "ãæãÈÇÓÇ¡ ßæäÛæ", lat: 1.36701269, lon: 29.02620704, pTime: 10, sTime: 19, image: "./plots/27.jpg" },
-	    { name: "ÛæãÈÇÑí¡ ßæäÛæ", lat: 2.70666173, lon: 29.04297273, pTime: 5, sTime: 12, image: "./plots/26.jpg" },
-	    { name: "ÈÇßæ¡ ßæäÛæ", lat: 2.30608171, lon: 30.09791619, pTime: 10, sTime: 19, image: "./plots/28.jpg" },
-	    { name: "ãÈíÇ¡ ÊäÒÇäíÇ", lat: -8.90183043, lon: 33.45531979, pTime: 25, sTime: 33, image: "./plots/30.jpg" },
-	    { name: "ÊæäÏæãÇ¡ ÊäÒÇäíÇ", lat: -9.29763044, lon: 32.77408513, pTime: 20, sTime: 25, image: "./plots/29.jpg" },
-	    { name: "áÇííáÇ¡ ÊäÒÇäíÇ", lat: -8.58152078, lon: 32.04357096, pTime: 25, sTime: 33, image: "./plots/31.jpg" },
-	    { name: "ãæãÈÇí¡ ÇáåäÏ", lat: 19.0760, lon: 72.8777, pTime: 13, sTime: 33, image: "./plots/1.jpg" },
-            { name: "ÅäÏæÑ¡ ÇáåäÏ", lat: 22.984386, lon: 76.055233, pTime: 20.7, sTime: 60.5, image: "./plots/3.jpg" },
-            { name: "ÓæáÇÈæÑ¡ ÇáåäÏ", lat: 17.695518, lon: 75.906818, pTime: 15.6, sTime: 42.6, image: "./plots/2.jpg" },
-	    { name: "ÃäÊíÓÇ¡ ÊÑßíÇ", lat: 39.22935130, lon: 25.99045138, pTime: 17, sTime: 29, image: "./plots/23.jpg" },
-            { name: "ÈÇáÇÌíÇ¡ ÇáíæäÇä", lat: 40.87140003, lon: 25.88312770, pTime: 15, sTime: 25, image: "./plots/24.jpg" },
-            { name: "ÓÇáæäíß¡ ÇáíæäÇä", lat: 40.65505399, lon: 22.94940416, pTime: 20, sTime: 40, image: "./plots/25.jpg" },
-            { name: "ÈæÊÑíáæ¡ ÊÔíáí", lat: -26.42617609, lon: -69.49107658, pTime: 7.5, sTime: 16.5, image: "./plots/6.jpg" },
-            { name: "ßæÈíÇÈæ¡ ÊÔíáí", lat: -27.36675722, lon: -70.34251701, pTime: 6, sTime: 12, image: "./plots/5.jpg" },
-            { name: "ÈæÑÊæ İáÇãäßæ¡ ÊÔíáí", lat: -26.57365677, lon: -70.68858635, pTime: 5.3, sTime: 10.3, image: "./plots/4.jpg" },
-            { name: "ÈæÛæÊÇ¡ ßæáæãÈíÇ", lat: 4.71285779, lon: -74.07514730, pTime: 4, sTime: 19.8, image: "./plots/8.jpg" },
-            { name: "ßæíÈÏæ¡ ßæáæãÈíÇ", lat: 5.70300349, lon: -76.65693441, pTime: 5.9, sTime: 22.9, image: "./plots/9.jpg" },
-            { name: "ÈæíäÇİäÊæÑÇ¡ ßæáæãÈíÇ", lat: 3.88025080, lon: -77.02497641, pTime: 6, sTime: 25.2, image: "./plots/10.jpg" },
-            { name: "äííİÇ¡ ßæáæãÈíÇ", lat: 2.93162290, lon: -75.27815023, pTime: 6.5, sTime: 26.1, image: "./plots/7.jpg" },
-            { name: "ÓÇä İíÓäÊí íæÌæÏæí¡ ÇáãßÓíß", lat: 16.06715948, lon: -96.61497274, pTime: 5, sTime: 9, image: "./plots/12.jpg" },
-            { name: "ÈæÑÊæ ÅÓßäÏíÏæ¡ ÇáãßÓíß", lat: 15.87366122, lon: -97.07454860, pTime: 2, sTime: 4, image: "./plots/13.jpg" },
-            { name: "ÓÇäÊÇ ßÇÊÇÑíäÇ ÌæíßíáÇ¡ ÇáãßÓíß", lat: 16.23959184, lon: -97.29906567, pTime: 4, sTime: 8, image: "./plots/11.jpg" },
-	    { name: "ããİíÓ¡ ÇáæáÇíÇÊ ÇáãÊÍÏÉ ÇáÃãÑíßíÉ", lat: 35.14968156, lon: -90.04170219, pTime: 9, sTime: 21, image: "./plots/15.jpg" },
-	    { name: "äíæÈæÑÊ¡ ÇáæáÇíÇÊ ÇáãÊÍÏÉ ÇáÃãÑíßíÉ", lat: 35.61322040, lon: -91.26667778, pTime: 7, sTime: 10, image: "./plots/14.jpg" },
-	    { name: "åæÊ ÓÈÑíäÛÒ¡ ÇáæáÇíÇÊ ÇáãÊÍÏÉ ÇáÃãÑíßíÉ", lat: 34.51183845, lon: -93.06418981, pTime: 11, sTime: 29, image: "./plots/16.jpg" },
-	    { name: "åíÛæíÑÇ Ïí ÒÇÑÇÛæÒÇ¡ ÇáãßÓíß", lat: 25.97167124, lon: -109.29939294, pTime: 12, sTime: 22.5, image: "./plots/18.jpg" },
-	    { name: "ÃÛæÇ İíÑÏí¡ ÇáãßÓíß", lat: 25.52077691, lon: -111.08574451, pTime: 15, sTime: 27, image: "./plots/19.jpg" },
-	    { name: "áÇÈÇÒ¡ ÇáãßÓíß", lat: 24.13977463, lon: -110.31462077, pTime: 16, sTime: 28.5, image: "./plots/17.jpg" },
-	    { name: "ÊíäÛæ ãÇÑíÇ¡ ÈíÑæ", lat: -9.29001392, lon: -76.00623362, pTime: 15, sTime: 33, image: "./plots/21.jpg" },
-	    { name: "åæÇÑãí¡ ÈíÑæ", lat: -10.06595410, lon: -78.16108824, pTime: 5, sTime: 14.3, image: "./plots/22.jpg" },
-	    { name: "áíãÇ¡ ÈíÑæ", lat: -12.03389083, lon: -77.04963214, pTime: 18, sTime: 38, image: "./plots/20.jpg" }
+            { name: "Ù…ÙˆÙ…Ø¨Ø§Ø³Ø§ØŒ ÙƒÙˆÙ†ØºÙˆ", lat: 1.36701269, lon: 29.02620704, pTime: 10, sTime: 19, image: "./plots/27.jpg" },
+	    { name: "ØºÙˆÙ…Ø¨Ø§Ø±ÙŠØŒ ÙƒÙˆÙ†ØºÙˆ", lat: 2.70666173, lon: 29.04297273, pTime: 5, sTime: 12, image: "./plots/26.jpg" },
+	    { name: "Ø¨Ø§ÙƒÙˆØŒ ÙƒÙˆÙ†ØºÙˆ", lat: 2.30608171, lon: 30.09791619, pTime: 10, sTime: 19, image: "./plots/28.jpg" },
+	    { name: "Ù…Ø¨ÙŠØ§ØŒ ØªÙ†Ø²Ø§Ù†ÙŠØ§", lat: -8.90183043, lon: 33.45531979, pTime: 25, sTime: 33, image: "./plots/30.jpg" },
+	    { name: "ØªÙˆÙ†Ø¯ÙˆÙ…Ø§ØŒ ØªÙ†Ø²Ø§Ù†ÙŠØ§", lat: -9.29763044, lon: 32.77408513, pTime: 20, sTime: 25, image: "./plots/29.jpg" },
+	    { name: "Ù„Ø§ÙŠÙŠÙ„Ø§ØŒ ØªÙ†Ø²Ø§Ù†ÙŠØ§", lat: -8.58152078, lon: 32.04357096, pTime: 25, sTime: 33, image: "./plots/31.jpg" },
+	    { name: "Ù…ÙˆÙ…Ø¨Ø§ÙŠØŒ Ø§Ù„Ù‡Ù†Ø¯", lat: 19.0760, lon: 72.8777, pTime: 13, sTime: 33, image: "./plots/1.jpg" },
+            { name: "Ø¥Ù†Ø¯ÙˆØ±ØŒ Ø§Ù„Ù‡Ù†Ø¯", lat: 22.984386, lon: 76.055233, pTime: 20.7, sTime: 60.5, image: "./plots/3.jpg" },
+            { name: "Ø³ÙˆÙ„Ø§Ø¨ÙˆØ±ØŒ Ø§Ù„Ù‡Ù†Ø¯", lat: 17.695518, lon: 75.906818, pTime: 15.6, sTime: 42.6, image: "./plots/2.jpg" },
+	    { name: "Ø£Ù†ØªÙŠØ³Ø§ØŒ ØªØ±ÙƒÙŠØ§", lat: 39.22935130, lon: 25.99045138, pTime: 17, sTime: 29, image: "./plots/23.jpg" },
+            { name: "Ø¨Ø§Ù„Ø§Ø¬ÙŠØ§ØŒ Ø§Ù„ÙŠÙˆÙ†Ø§Ù†", lat: 40.87140003, lon: 25.88312770, pTime: 15, sTime: 25, image: "./plots/24.jpg" },
+            { name: "Ø³Ø§Ù„ÙˆÙ†ÙŠÙƒØŒ Ø§Ù„ÙŠÙˆÙ†Ø§Ù†", lat: 40.65505399, lon: 22.94940416, pTime: 20, sTime: 40, image: "./plots/25.jpg" },
+            { name: "Ø¨ÙˆØªØ±ÙŠÙ„ÙˆØŒ ØªØ´ÙŠÙ„ÙŠ", lat: -26.42617609, lon: -69.49107658, pTime: 7.5, sTime: 16.5, image: "./plots/6.jpg" },
+            { name: "ÙƒÙˆØ¨ÙŠØ§Ø¨ÙˆØŒ ØªØ´ÙŠÙ„ÙŠ", lat: -27.36675722, lon: -70.34251701, pTime: 6, sTime: 12, image: "./plots/5.jpg" },
+            { name: "Ø¨ÙˆØ±ØªÙˆ ÙÙ„Ø§Ù…Ù†ÙƒÙˆØŒ ØªØ´ÙŠÙ„ÙŠ", lat: -26.57365677, lon: -70.68858635, pTime: 5.3, sTime: 10.3, image: "./plots/4.jpg" },
+            { name: "Ø¨ÙˆØºÙˆØªØ§ØŒ ÙƒÙˆÙ„ÙˆÙ…Ø¨ÙŠØ§", lat: 4.71285779, lon: -74.07514730, pTime: 4, sTime: 19.8, image: "./plots/8.jpg" },
+            { name: "ÙƒÙˆÙŠØ¨Ø¯ÙˆØŒ ÙƒÙˆÙ„ÙˆÙ…Ø¨ÙŠØ§", lat: 5.70300349, lon: -76.65693441, pTime: 5.9, sTime: 22.9, image: "./plots/9.jpg" },
+            { name: "Ø¨ÙˆÙŠÙ†Ø§ÙÙ†ØªÙˆØ±Ø§ØŒ ÙƒÙˆÙ„ÙˆÙ…Ø¨ÙŠØ§", lat: 3.88025080, lon: -77.02497641, pTime: 6, sTime: 25.2, image: "./plots/10.jpg" },
+            { name: "Ù†ÙŠÙŠÙØ§ØŒ ÙƒÙˆÙ„ÙˆÙ…Ø¨ÙŠØ§", lat: 2.93162290, lon: -75.27815023, pTime: 6.5, sTime: 26.1, image: "./plots/7.jpg" },
+            { name: "Ø³Ø§Ù† ÙÙŠØ³Ù†ØªÙŠ ÙŠÙˆØ¬ÙˆØ¯ÙˆÙŠØŒ Ø§Ù„Ù…ÙƒØ³ÙŠÙƒ", lat: 16.06715948, lon: -96.61497274, pTime: 5, sTime: 9, image: "./plots/12.jpg" },
+            { name: "Ø¨ÙˆØ±ØªÙˆ Ø¥Ø³ÙƒÙ†Ø¯ÙŠØ¯ÙˆØŒ Ø§Ù„Ù…ÙƒØ³ÙŠÙƒ", lat: 15.87366122, lon: -97.07454860, pTime: 2, sTime: 4, image: "./plots/13.jpg" },
+            { name: "Ø³Ø§Ù†ØªØ§ ÙƒØ§ØªØ§Ø±ÙŠÙ†Ø§ Ø¬ÙˆÙŠÙƒÙŠÙ„Ø§ØŒ Ø§Ù„Ù…ÙƒØ³ÙŠÙƒ", lat: 16.23959184, lon: -97.29906567, pTime: 4, sTime: 8, image: "./plots/11.jpg" },
+	    { name: "Ù…Ù…ÙÙŠØ³ØŒ Ø§Ù„ÙˆÙ„Ø§ÙŠØ§Øª Ø§Ù„Ù…ØªØ­Ø¯Ø© Ø§Ù„Ø£Ù…Ø±ÙŠÙƒÙŠØ©", lat: 35.14968156, lon: -90.04170219, pTime: 9, sTime: 21, image: "./plots/15.jpg" },
+	    { name: "Ù†ÙŠÙˆØ¨ÙˆØ±ØªØŒ Ø§Ù„ÙˆÙ„Ø§ÙŠØ§Øª Ø§Ù„Ù…ØªØ­Ø¯Ø© Ø§Ù„Ø£Ù…Ø±ÙŠÙƒÙŠØ©", lat: 35.61322040, lon: -91.26667778, pTime: 7, sTime: 10, image: "./plots/14.jpg" },
+	    { name: "Ù‡ÙˆØª Ø³Ø¨Ø±ÙŠÙ†ØºØ²ØŒ Ø§Ù„ÙˆÙ„Ø§ÙŠØ§Øª Ø§Ù„Ù…ØªØ­Ø¯Ø© Ø§Ù„Ø£Ù…Ø±ÙŠÙƒÙŠØ©", lat: 34.51183845, lon: -93.06418981, pTime: 11, sTime: 29, image: "./plots/16.jpg" },
+	    { name: "Ù‡ÙŠØºÙˆÙŠØ±Ø§ Ø¯ÙŠ Ø²Ø§Ø±Ø§ØºÙˆØ²Ø§ØŒ Ø§Ù„Ù…ÙƒØ³ÙŠÙƒ", lat: 25.97167124, lon: -109.29939294, pTime: 12, sTime: 22.5, image: "./plots/18.jpg" },
+	    { name: "Ø£ØºÙˆØ§ ÙÙŠØ±Ø¯ÙŠØŒ Ø§Ù„Ù…ÙƒØ³ÙŠÙƒ", lat: 25.52077691, lon: -111.08574451, pTime: 15, sTime: 27, image: "./plots/19.jpg" },
+	    { name: "Ù„Ø§Ø¨Ø§Ø²ØŒ Ø§Ù„Ù…ÙƒØ³ÙŠÙƒ", lat: 24.13977463, lon: -110.31462077, pTime: 16, sTime: 28.5, image: "./plots/17.jpg" },
+	    { name: "ØªÙŠÙ†ØºÙˆ Ù…Ø§Ø±ÙŠØ§ØŒ Ø¨ÙŠØ±Ùˆ", lat: -9.29001392, lon: -76.00623362, pTime: 15, sTime: 33, image: "./plots/21.jpg" },
+	    { name: "Ù‡ÙˆØ§Ø±Ù…ÙŠØŒ Ø¨ÙŠØ±Ùˆ", lat: -10.06595410, lon: -78.16108824, pTime: 5, sTime: 14.3, image: "./plots/22.jpg" },
+	    { name: "Ù„ÙŠÙ…Ø§ØŒ Ø¨ÙŠØ±Ùˆ", lat: -12.03389083, lon: -77.04963214, pTime: 18, sTime: 38, image: "./plots/20.jpg" }
         ];
 
-        // Separate list for stations related to the "ÃÙåÑ" button
+        // Separate list for stations related to the "Ø£Ø¸Ù‡Ø±" button
         const stationsEpi = [
-            { name: "ßæäÛæ", lat: 2.12932056, lon: 29.30141344 },
-            { name: "ÊäÒÇäíÇ", lat: -8.84657605, lon: 32.72374405 },
-            { name: "ÊÑßíÇ", lat: 40.12921423, lon: 25.20984117 },
-	    { name: "ÇáãßÓíß-ÌäæÈ", lat: 16.03526040, lon: -96.98891112 },
-            { name: "ÇáãßÓíß-ÔãÇá", lat: 25.21197429, lon: -109.92548634 },
-	    { name: "ÇáåäÏ", lat: 19.77989863, lon: 74.68848178 },
-	    { name: "ÊÔíáí", lat: -26.80475830, lon: -70.32974088 },
-            { name: "ÈíÑæ", lat: -10.25526609, lon: -77.32909499 },
-            { name: "ÇáæáÇíÇÊ ÇáãÊÍÏÉ ÇáÃãÑíßíÉ", lat: 35.34085579, lon: -91.35248032 },
-            { name: "ßæáæãÈíÇ", lat: 4.68879149, lon: -75.50000909 }
+            { name: "ÙƒÙˆÙ†ØºÙˆ", lat: 2.12932056, lon: 29.30141344 },
+            { name: "ØªÙ†Ø²Ø§Ù†ÙŠØ§", lat: -8.84657605, lon: 32.72374405 },
+            { name: "ØªØ±ÙƒÙŠØ§", lat: 40.12921423, lon: 25.20984117 },
+	    { name: "Ø§Ù„Ù…ÙƒØ³ÙŠÙƒ-Ø¬Ù†ÙˆØ¨", lat: 16.03526040, lon: -96.98891112 },
+            { name: "Ø§Ù„Ù…ÙƒØ³ÙŠÙƒ-Ø´Ù…Ø§Ù„", lat: 25.21197429, lon: -109.92548634 },
+	    { name: "Ø§Ù„Ù‡Ù†Ø¯", lat: 19.77989863, lon: 74.68848178 },
+	    { name: "ØªØ´ÙŠÙ„ÙŠ", lat: -26.80475830, lon: -70.32974088 },
+            { name: "Ø¨ÙŠØ±Ùˆ", lat: -10.25526609, lon: -77.32909499 },
+            { name: "Ø§Ù„ÙˆÙ„Ø§ÙŠØ§Øª Ø§Ù„Ù…ØªØ­Ø¯Ø© Ø§Ù„Ø£Ù…Ø±ÙŠÙƒÙŠØ©", lat: 35.34085579, lon: -91.35248032 },
+            { name: "ÙƒÙˆÙ„ÙˆÙ…Ø¨ÙŠØ§", lat: 4.68879149, lon: -75.50000909 }
         ];
 
         // Array to keep track of shown markers
@@ -208,7 +208,7 @@
         stations.forEach(station => {
             const marker = L.marker([station.lat, station.lon])
                 .addTo(map)
-                .bindPopup(`<b>${station.name}</b><br><a href="#" onclick="showSeismogram('${station.image}')">ÓíÓãæÛÑÇã</a>`);
+                .bindPopup(`<b>${station.name}</b><br><a href="#" onclick="showSeismogram('${station.image}')">Ø³ÙŠØ³Ù…ÙˆØºØ±Ø§Ù…</a>`);
 
             const option1 = document.createElement('option');
             option1.text = station.name;
@@ -216,7 +216,7 @@
             document.getElementById('stationSelect').add(option1);
         });
 
-        // Populate dropdown for "ÃÙåÑ" button with stationsEpi data
+        // Populate dropdown for "Ø£Ø¸Ù‡Ø±" button with stationsEpi data
         stationsEpi.forEach(station => {
             const option2 = document.createElement('option');
             option2.text = station.name;
@@ -243,7 +243,7 @@
             const distance = parseFloat(document.getElementById('distanceInput').value);
 
             if (!stationData || isNaN(distance)) {
-                alert('íÑÌì ÇÎÊíÇÑ ãÍØÉ æÅÏÎÇá ãÓÇİÉ ÕÍíÍÉ.');
+                alert('ÙŠØ±Ø¬Ù‰ Ø§Ø®ØªÙŠØ§Ø± Ù…Ø­Ø·Ø© ÙˆØ¥Ø¯Ø®Ø§Ù„ Ù…Ø³Ø§ÙØ© ØµØ­ÙŠØ­Ø©.');
                 return;
             }
 
@@ -266,7 +266,7 @@
             const selectedData = JSON.parse(document.getElementById('showStationSelect').value);
 
             if (!selectedData) {
-                alert('íÑÌì ÇÎÊíÇÑ ãÍØÉ áÅÙåÇÑåÇ.');
+                alert('ÙŠØ±Ø¬Ù‰ Ø§Ø®ØªÙŠØ§Ø± Ù…Ø­Ø·Ø© Ù„Ø¥Ø¸Ù‡Ø§Ø±Ù‡Ø§.');
                 return;
             }
 
@@ -301,7 +301,7 @@
             data: {
                 datasets: [
                     {
-                        label: 'Òãä ÇäÊŞÇá ÇáãæÌÉ P',
+                        label: 'Ø²Ù…Ù† Ø§Ù†ØªÙ‚Ø§Ù„ Ø§Ù„Ù…ÙˆØ¬Ø© P',
                         data: [
                             {x: 0, y: 0},
                             {x: 1515.79, y: 200}
@@ -310,7 +310,7 @@
                         fill: false
                     },
                     {
-                        label: 'Òãä ÇäÊŞÇá ÇáãæÌÉ S',
+                        label: 'Ø²Ù…Ù† Ø§Ù†ØªÙ‚Ø§Ù„ Ø§Ù„Ù…ÙˆØ¬Ø© S',
                         data: [
                             {x: 0, y: 0},
                             {x: 821.053, y: 200}
@@ -319,7 +319,7 @@
                         fill: false
                     },
                     {
-                        label: 'ÇáİÇÕá ÇáÒãäí S-P',
+                        label: 'Ø§Ù„ÙØ§ØµÙ„ Ø§Ù„Ø²Ù…Ù†ÙŠ S-P',
                         data: [
                             {x: 0, y: 0},
                             {x: 1800, y: 186.498}
@@ -337,13 +337,13 @@
                         position: 'bottom',
                         title: {
                             display: true,
-                            text: 'ÇáãÓÇİÉ (ßã)'
+                            text: 'Ø§Ù„Ù…Ø³Ø§ÙØ© (ÙƒÙ…)'
                         }
                     },
                     y: {
                         title: {
                             display: true,
-                            text: 'ÇáæŞÊ (ËÇäíÉ)'
+                            text: 'Ø§Ù„ÙˆÙ‚Øª (Ø«Ø§Ù†ÙŠØ©)'
                         }
                     }
                 }
