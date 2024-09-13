@@ -4,7 +4,7 @@ const map = L.map('map').setView([34.2901, 2.7499], 8); // Centered between Aflo
 // Load OpenStreetMap tiles
 L.tileLayer('https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png', {
   maxZoom: 19,
-  attribution: '© OpenStreetMap contributors'
+  attribution: '¬© OpenStreetMap contributors'
 }).addTo(map);
 
 // Define A and B points, markers, and polyline
@@ -17,11 +17,11 @@ let chartInstance = null; // To hold the Chart.js instance
 map.on('click', function (e) {
   if (!pointA) {
     pointA = e.latlng;
-    markerA = L.marker(pointA, { draggable: true }).addTo(map).bindPopup("«·‰ﬁÿ… √").openPopup();
+    markerA = L.marker(pointA, { draggable: true }).addTo(map).bindPopup("ÿßŸÑŸÜŸÇÿ∑ÿ© ÿ£").openPopup();
     markerA.on('dragend', updateProfile); // Update profile on marker drag
   } else if (!pointB) {
     pointB = e.latlng;
-    markerB = L.marker(pointB, { draggable: true }).addTo(map).bindPopup("«·‰ﬁÿ… »").openPopup();
+    markerB = L.marker(pointB, { draggable: true }).addTo(map).bindPopup("ÿßŸÑŸÜŸÇÿ∑ÿ© ÿ®").openPopup();
     markerB.on('dragend', updateProfile); // Update profile on marker drag
     generateProfile(pointB, pointA); // Call function to generate the initial topographic profile
   }
@@ -90,7 +90,7 @@ function plotProfile(distances, elevations) {
     data: {
       labels: distances, // Distances between points for X-axis
       datasets: [{
-        label: '«·«— ›«⁄ („)',
+        label: 'ÿßŸÑÿßÿ±ÿ™ŸÅÿßÿπ (ŸÖ)',
         data: elevations,
         borderColor: 'rgb(75, 192, 192)',
         tension: 0.4 // Make the line smoother
@@ -100,7 +100,7 @@ function plotProfile(distances, elevations) {
       scales: {
         x: {
           display: true,
-          title: { display: true, text: '«·„”«›… („)', font: { size: 16 } },
+          title: { display: true, text: 'ÿßŸÑŸÖÿ≥ÿßŸÅÿ© (ŸÖ)', font: { size: 16 } },
           ticks: {
             callback: function(value) {
               return Math.round(value); // Round x-axis values
@@ -111,7 +111,7 @@ function plotProfile(distances, elevations) {
         },
         y: {
           display: true,
-          title: { display: true, text: '«·«— ›«⁄ („)', font: { size: 16 } },
+          title: { display: true, text: 'ÿßŸÑÿßÿ±ÿ™ŸÅÿßÿπ (ŸÖ)', font: { size: 16 } },
           position: 'right',
           grid: { drawOnChartArea: true },
           ticks: { font: { size: 12 } } // Make y-axis labels bigger
@@ -122,7 +122,7 @@ function plotProfile(distances, elevations) {
           annotations: {
             aLabel: {
               type: 'label',
-              content: ['√'],
+              content: ['ÿ£'],
               position: 'start',
               font: { size: 18 },
               xValue: 0, // Position on X-axis
@@ -131,7 +131,7 @@ function plotProfile(distances, elevations) {
             },
             bLabel: {
               type: 'label',
-              content: ['»'],
+              content: ['ÿ®'],
               position: 'start',
               font: { size: 18 },
               xValue: distances[distances.length - 1], // End on X-axis
@@ -146,7 +146,7 @@ function plotProfile(distances, elevations) {
 
   // Add a custom scale on the bottom-left
   ctx.font = "14px Arial";
-  ctx.fillText("„ﬁÌ«”", 30, ctx.canvas.height - 20); // Position for the scale text
+  ctx.fillText("ŸÖŸÇŸäÿßÿ≥", 30, ctx.canvas.height - 20); // Position for the scale text
 }
 
 // Function to update the profile and polyline when markers are moved
