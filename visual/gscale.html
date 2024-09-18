@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ำแใ วแาใไ วแฬํๆแๆฬํ</title>
+    <title>ุณูู… ุงูุฒู…ู ุงูุฌููููุฌู</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
         body {
@@ -49,10 +49,10 @@
 </head>
 <body>
 <div class="header">
-    <a href="../index.html">วแีÝอษ วแรๆแ์</a>
+    <a href="../index.html">ุงูุตูุญุฉ ุงูุฃููู</a>
 </div>
-    <h1>ำแใ วแาใไ วแฬํๆแๆฬํ</h1>
-    <p>(ํใ฿ไ วแส฿ศํั ไอๆ รํ อÞศษ รๆ ฺีั รๆ ใศวิัษ ศวแึÛุ ฺแ์ วแิัํุ วแใัวฯ)</p>
+    <h1>ุณูู… ุงูุฒู…ู ุงูุฌููููุฌู</h1>
+    <p>(ูู…ูู ุงูุชูุจูุฑ ูุญู ุฃู ุญูุจุฉ ุฃู ุนุตุฑ ุฃู ู…ุจุงุดุฑุฉ ุจุงูุถุบุท ุนูู ุงูุดุฑูุท ุงูู…ุฑุงุฏ)</p>
     <svg id="timeline-svg" width="960" height="500"></svg>
     <div id="tooltip" class="tooltip"></div>
 
@@ -73,7 +73,7 @@
             .domain([4600, 0]) // 4.6 billion years ago to 0 (present)
             .range([0, width]);
 
-        const xAxis = d3.axisBottom(x).tickFormat(d => d > 1000 ? `${d / 1000} ใแํวั ำไษ` : `${d} ใแํๆไ ำไษ`);
+        const xAxis = d3.axisBottom(x).tickFormat(d => d > 1000 ? `${d / 1000} ู…ููุงุฑ ุณูุฉ` : `${d} ู…ูููู ุณูุฉ`);
 
         // Adding the x-axis
         const xAxisGroup = svg.append("g")
@@ -123,46 +123,46 @@
         // Data for eons, eras, and periods
         const bands = [
                         // Eons
-{ name: "วแฯๅั วแฬๅไใํ", start: 4600, end: 4000, type: "eon", color: "#FF6347" },  // Tomato
-{ name: "วแฯๅั วแำอํÞ", start: 4000, end: 2500, type: "eon", color: "#4682B4" },  // SteelBlue
-{ name: "ฯๅั วแุแวฦฺ", start: 2500, end: 538.8, type: "eon", color: "#8A2BE2" },  // BlueViolet
-{ name: "ฯๅั วแศิวฦั", start: 538.8, end: 0, type: "eon", color: "#20B2AA" },  // LightSeaGreen
+{ name: "ุงูุฏูุฑ ุงูุฌููู…ู", start: 4600, end: 4000, type: "eon", color: "#FF6347" },  // Tomato
+{ name: "ุงูุฏูุฑ ุงูุณุญูู", start: 4000, end: 2500, type: "eon", color: "#4682B4" },  // SteelBlue
+{ name: "ุฏูุฑ ุงูุทูุงุฆุน", start: 2500, end: 538.8, type: "eon", color: "#8A2BE2" },  // BlueViolet
+{ name: "ุฏูุฑ ุงูุจุดุงุฆุฑ", start: 538.8, end: 0, type: "eon", color: "#20B2AA" },  // LightSeaGreen
 
 // Eras
-{ name: "วแอÞศษ วแำอํÞษ วแรๆแ์", start: 4000, end: 3600, type: "era", color: "#FF8C00" },  // DarkOrange
-{ name: "วแอÞศษ วแำอํÞษ วแใศ฿ัษ", start: 3600, end: 3200, type: "era", color: "#FF4500" },  // OrangeRed
-{ name: "วแอÞศษ วแำอํÞษ วแๆำุ์", start: 3200, end: 2800, type: "era", color: "#9400D3" },  // DarkViolet
-{ name: "วแอÞศษ วแำอํÞษ วแอฯํหษ", start: 2800, end: 2500, type: "era", color: "#1E90FF" },  // DodgerBlue
-{ name: "อÞศษ วแุแวฦฺ วแÞฯํใษ", start: 2500, end: 1600, type: "era", color: "#00FA9A" },  // MediumSpringGreen
-{ name: "อÞศษ วแุแวฦฺ วแๆำุ์", start: 1600, end: 1000, type: "era", color: "#32CD32" },  // LimeGreen
-{ name: "อÞศษ วแุแวฦฺ วแอฯํหษ", start: 1000, end: 538.8, type: "era", color: "#FFD700" },  // Gold
-{ name: "อÞศษ วแอํวษ วแÞฯํใษ", start: 538.8, end: 251.9, type: "era", color: "#6A5ACD" },  // SlateBlue
-{ name: "อÞศษ วแอํวษ วแๆำุ์", start: 251.9, end: 66, type: "era", color: "#DC143C" },  // Crimson
-{ name: "อÞศษ วแอํวษ วแอฯํหษ", start: 66, end: 0, type: "era", color: "#FF69B4" },  // HotPink
+{ name: "ุงูุญูุจุฉ ุงูุณุญููุฉ ุงูุฃููู", start: 4000, end: 3600, type: "era", color: "#FF8C00" },  // DarkOrange
+{ name: "ุงูุญูุจุฉ ุงูุณุญููุฉ ุงูู…ุจูุฑุฉ", start: 3600, end: 3200, type: "era", color: "#FF4500" },  // OrangeRed
+{ name: "ุงูุญูุจุฉ ุงูุณุญููุฉ ุงููุณุทู", start: 3200, end: 2800, type: "era", color: "#9400D3" },  // DarkViolet
+{ name: "ุงูุญูุจุฉ ุงูุณุญููุฉ ุงูุญุฏูุซุฉ", start: 2800, end: 2500, type: "era", color: "#1E90FF" },  // DodgerBlue
+{ name: "ุญูุจุฉ ุงูุทูุงุฆุน ุงููุฏูู…ุฉ", start: 2500, end: 1600, type: "era", color: "#00FA9A" },  // MediumSpringGreen
+{ name: "ุญูุจุฉ ุงูุทูุงุฆุน ุงููุณุทู", start: 1600, end: 1000, type: "era", color: "#32CD32" },  // LimeGreen
+{ name: "ุญูุจุฉ ุงูุทูุงุฆุน ุงูุญุฏูุซุฉ", start: 1000, end: 538.8, type: "era", color: "#FFD700" },  // Gold
+{ name: "ุญูุจุฉ ุงูุญูุงุฉ ุงููุฏูู…ุฉ", start: 538.8, end: 251.9, type: "era", color: "#6A5ACD" },  // SlateBlue
+{ name: "ุญูุจุฉ ุงูุญูุงุฉ ุงููุณุทู", start: 251.9, end: 66, type: "era", color: "#DC143C" },  // Crimson
+{ name: "ุญูุจุฉ ุงูุญูุงุฉ ุงูุญุฏูุซุฉ", start: 66, end: 0, type: "era", color: "#FF69B4" },  // HotPink
 
 // Periods
-{ name: "ฺีั วแำํฯัํ", start: 2500, end: 2300, type: "period", color: "#556B2F" },  // DarkOliveGreen
-{ name: "ฺีั วแัํวำํ", start: 2300, end: 2050, type: "period", color: "#F0E68C" },  // Khaki
-{ name: "ฺีั วแรๆัๆำํัํ", start: 2050, end: 1800, type: "period", color: "#8B4513" },  // SaddleBrown
-{ name: "ฺีั วแำสวหัํ", start: 1800, end: 1600, type: "period", color: "#D2691E" },  // Chocolate
-{ name: "ฺีั วแ฿วแใํ", start: 1600, end: 1400, type: "period", color: "#B22222" },  // FireBrick
-{ name: "ฺีั วแล฿สวำํ", start: 1400, end: 1200, type: "period", color: "#5F9EA0" },  // CadetBlue
-{ name: "ฺีั วแำสไํ", start: 1200, end: 1000, type: "period", color: "#FF7F50" },  // Coral
-{ name: "ฺีั วแสๆไํ", start: 1000, end: 720, type: "period", color: "#3CB371" },  // MediumSeaGreen
-{ name: "วแฺีั วแศวัฯ", start: 720, end: 635, type: "period", color: "#48D1CC" },  // MediumTurquoise
-{ name: "วแฺีั วแลฯํว฿วัํ", start: 635, end: 538.8, type: "period", color: "#F08080" },  // LightCoral
-{ name: "วแ฿ใศัํ", start: 538.8, end: 485.4, type: "period", color: "#6B8E23" },  // OliveDrab
-{ name: "วแรๆัฯÝํิํ", start: 485.4, end: 443.8, type: "period", color: "#20B2AA" },  // LightSeaGreen
-{ name: "วแำํแๆัํ", start: 443.8, end: 419.2, type: "period", color: "#87CEEB" },  // SkyBlue
-{ name: "วแฯํÝๆไํ", start: 419.2, end: 358.9, type: "period", color: "#4682B4" },  // SteelBlue
-{ name: "วแ฿ัศๆไํ", start: 358.9, end: 298.9, type: "period", color: "#7FFF00" },  // Chartreuse
-{ name: "วแศัใํ", start: 298.9, end: 251.9, type: "period", color: "#CD5C5C" },  // IndianRed
-{ name: "วแสัํวำํ", start: 251.9, end: 201.4, type: "period", color: "#FF6347" },  // Tomato
-{ name: "วแฬๆัวำํ", start: 201.4, end: 145, type: "period", color: "#00FF7F" },  // SpringGreen
-{ name: "วแุศวิํัํ", start: 145, end: 66, type: "period", color: "#FF4500" },  // OrangeRed
-{ name: "วแศวแํๆฬํไํ", start: 66, end: 23.03, type: "period", color: "#FFD700" },  // Gold
-{ name: "วแไํๆฬํไํ", start: 23.03, end: 2.58, type: "period", color: "#00CED1" },  // DarkTurquoise
-{ name: "วแัศวฺํ", start: 2.58, end: 0, type: "period", color: "#4169E1" }  // RoyalBlue
+{ name: "ุนุตุฑ ุงูุณูุฏุฑู", start: 2500, end: 2300, type: "period", color: "#556B2F" },  // DarkOliveGreen
+{ name: "ุนุตุฑ ุงูุฑูุงุณู", start: 2300, end: 2050, type: "period", color: "#F0E68C" },  // Khaki
+{ name: "ุนุตุฑ ุงูุฃูุฑูุณูุฑู", start: 2050, end: 1800, type: "period", color: "#8B4513" },  // SaddleBrown
+{ name: "ุนุตุฑ ุงูุณุชุงุซุฑู", start: 1800, end: 1600, type: "period", color: "#D2691E" },  // Chocolate
+{ name: "ุนุตุฑ ุงููุงูู…ู", start: 1600, end: 1400, type: "period", color: "#B22222" },  // FireBrick
+{ name: "ุนุตุฑ ุงูุฅูุชุงุณู", start: 1400, end: 1200, type: "period", color: "#5F9EA0" },  // CadetBlue
+{ name: "ุนุตุฑ ุงูุณุชูู", start: 1200, end: 1000, type: "period", color: "#FF7F50" },  // Coral
+{ name: "ุนุตุฑ ุงูุชููู", start: 1000, end: 720, type: "period", color: "#3CB371" },  // MediumSeaGreen
+{ name: "ุงูุนุตุฑ ุงูุจุงุฑุฏ", start: 720, end: 635, type: "period", color: "#48D1CC" },  // MediumTurquoise
+{ name: "ุงูุนุตุฑ ุงูุฅุฏูุงูุงุฑู", start: 635, end: 538.8, type: "period", color: "#F08080" },  // LightCoral
+{ name: "ุงููู…ุจุฑู", start: 538.8, end: 485.4, type: "period", color: "#6B8E23" },  // OliveDrab
+{ name: "ุงูุฃูุฑุฏููุดู", start: 485.4, end: 443.8, type: "period", color: "#20B2AA" },  // LightSeaGreen
+{ name: "ุงูุณูููุฑู", start: 443.8, end: 419.2, type: "period", color: "#87CEEB" },  // SkyBlue
+{ name: "ุงูุฏููููู", start: 419.2, end: 358.9, type: "period", color: "#4682B4" },  // SteelBlue
+{ name: "ุงููุฑุจููู", start: 358.9, end: 298.9, type: "period", color: "#7FFF00" },  // Chartreuse
+{ name: "ุงูุจุฑู…ู", start: 298.9, end: 251.9, type: "period", color: "#CD5C5C" },  // IndianRed
+{ name: "ุงูุชุฑูุงุณู", start: 251.9, end: 201.4, type: "period", color: "#FF6347" },  // Tomato
+{ name: "ุงูุฌูุฑุงุณู", start: 201.4, end: 145, type: "period", color: "#00FF7F" },  // SpringGreen
+{ name: "ุงูุทุจุงุดูุฑู", start: 145, end: 66, type: "period", color: "#FF4500" },  // OrangeRed
+{ name: "ุงูุจุงูููุฌููู", start: 66, end: 23.03, type: "period", color: "#FFD700" },  // Gold
+{ name: "ุงููููุฌููู", start: 23.03, end: 2.58, type: "period", color: "#00CED1" },  // DarkTurquoise
+{ name: "ุงูุฑุจุงุนู", start: 2.58, end: 0, type: "period", color: "#4169E1" }  // RoyalBlue
         ];
 
         // Append bands for eons, eras, and periods with reduced gaps between rows
@@ -181,7 +181,7 @@
             .attr("fill", d => d.color)
             .on("mouseover", (event, d) => {
                 tooltip.style("opacity", 1)
-                    .html(`<strong>${d.name}</strong><br>วแศฯวํษ: ${d.start} ใแํๆไ ำไษ<br>วแไๅวํษ: ${d.end} ใแํๆไ ำไษ`)
+                    .html(`<strong>${d.name}</strong><br>ุงูุจุฏุงูุฉ: ${d.start} ู…ูููู ุณูุฉ<br>ุงูููุงูุฉ: ${d.end} ู…ูููู ุณูุฉ`)
                     .style("left", (event.pageX + 10) + "px")
                     .style("top", (event.pageY - 30) + "px");
             })
