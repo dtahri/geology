@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://dtahri.github.io/geology/</loc>
+  <lastmod>2024-09-18T18:18:20+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://dtahri.github.io/geology/resources/geology</loc>
+  <lastmod>2024-09-18T18:18:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://dtahri.github.io/geology/resources/tprofil</loc>
+  <lastmod>2024-09-18T18:18:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://dtahri.github.io/geology/resources/topography</loc>
+  <lastmod>2024-09-18T18:18:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://dtahri.github.io/geology/resources/polarizing</loc>
+  <lastmod>2024-09-18T18:18:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://dtahri.github.io/geology/resources/minerals</loc>
+  <lastmod>2024-09-18T18:18:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://dtahri.github.io/geology/visual/crystals</loc>
+  <lastmod>2024-09-18T18:18:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://dtahri.github.io/geology/visual/volcanoes</loc>
+  <lastmod>2024-09-18T18:18:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://dtahri.github.io/geology/resources/earthquakes</loc>
+  <lastmod>2024-09-18T18:18:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://dtahri.github.io/geology/visual/epicenter</loc>
+  <lastmod>2024-09-18T18:18:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://dtahri.github.io/geology/visual/utils/top.html</loc>
+  <lastmod>2024-09-18T18:18:20+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://dtahri.github.io/geology/visual/utils/fileapi2.html</loc>
+  <lastmod>2024-09-18T18:18:20+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://dtahri.github.io/geology/visual/engines/jsmol/</loc>
+  <lastmod>2024-09-18T18:18:20+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dtahri.github.io/geology/visual/engines/chemdoodle/</loc>
+  <lastmod>2024-09-18T18:18:20+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://dtahri.github.io/geology/visual/engines/player.html/player.html</loc>
+  <lastmod>2024-09-18T18:18:20+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+
+
+</urlset>
