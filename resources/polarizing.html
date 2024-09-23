@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>محاكاة المجهر المستقطب</title>
     <style>
@@ -13,15 +12,16 @@
             margin: 0;
             font-family: Arial, sans-serif;
             position: relative;
+            overflow-x: hidden;
         }
-	
-	.title {
-                text-align: right;
-                font-size: 20px;
-                padding: 5px;
-                font-family: Arial, sans-serif;
-		direction: rtl;
-            }
+
+        .title {
+            text-align: right;
+            font-size: 20px;
+            padding: 5px;
+            font-family: Arial, sans-serif;
+            direction: rtl;
+        }
 
         /* Right Sidebar styling */
         #sidebar {
@@ -33,6 +33,24 @@
             right: 0;
             top: 0;
             height: 100%;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Hidden sidebar */
+        #sidebar.hide {
+            transform: translateX(100%);
+        }
+
+        /* Pin button */
+        #pin-button {
+            position: absolute;
+            left: -40px;
+            top: 10px;
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 5px;
+            cursor: pointer;
+            font-size: 16px;
         }
 
         #collapsible, #collapsible2, #collapsible3, #collapsible4 {
@@ -46,13 +64,13 @@
             font-size: 20px;
         }
 
-	  #collapsible-content, #collapsible-content2, #collapsible-content3, #collapsible-content4 {
+        #collapsible-content, #collapsible-content2, #collapsible-content3, #collapsible-content4 {
             display: none;
             overflow: hidden;
-		text-align: right;
-		font-size: 15px;
+            text-align: right;
+            font-size: 15px;
         }
-	
+
         /* Centered circular layout for images and buttons */
         #container {
             position: relative;
@@ -79,8 +97,6 @@
             justify-content: center;
             margin-top: 20px;
         }
-
-        
     </style>
 </head>
 <body>
@@ -164,19 +180,19 @@
 
         <!-- Buttons in a circular layout under the images -->
         <div id="buttons">
-
-        
-<button onclick="showImage2()">ض.م.م</button>
-
-	<button onclick="showImage1()">ض.م.غ.م</button>
-    </div>
+            <button onclick="showImage2()">ض.م.م</button>
+            <button onclick="showImage1()">ض.م.غ.م</button>
+        </div>
     </div>
 
     <!-- Right Sidebar with Collapsible Menu -->
     <div id="sidebar">
-<div class="title">
-   <p><a href="../">الصفحة الأولى</a></p>
-  </div>
+        <div id="pin-button">القائمة</div> <!-- Pin/Unpin button -->
+
+        <div class="title">
+            <p><a href="../index.html">الصفحة الأولى</a></p>
+        </div>
+
         <button id="collapsible4">معادن</button>
         <div id="collapsible-content4">
             <h3><a href="#" onclick="showImages(1, 2)">أوليفين</a></h3>
@@ -227,33 +243,21 @@
     </div>
 
     <script>
-        let currentPair = []; // Default pair to show
+        // Pin/unpin logic
+        let isPinned = false;
+        const sidebar = document.getElementById('sidebar');
+        const pinButton = document.getElementById('pin-button');
 
-        function showImages(img1, img2) {
-            // Set current pair of images to show
-            currentPair = [img1, img2];
-            updateImages();
-        }
-
-        function showImage1() {
-            document.getElementById(`image${currentPair[0]}`).style.opacity = '1';
-            document.getElementById(`image${currentPair[1]}`).style.opacity = '0';
-        }
-
-        function showImage2() {
-            document.getElementById(`image${currentPair[0]}`).style.opacity = '0';
-            document.getElementById(`image${currentPair[1]}`).style.opacity = '1';
-        }
-
-        function updateImages() {
-            // Hide all images first
-            const images = document.querySelectorAll('.image');
-            images.forEach(img => img.style.opacity = '0');
-
-            // Show only the current pair
-            document.getElementById(`image${currentPair[0]}`).style.opacity = '1';
-            document.getElementById(`image${currentPair[1]}`).style.opacity = '0';
-        }
+        // Automatically hide the sidebar when not pinned
+        document.addEventListener('mousemove', function(e) {
+            if (!isPinned) {
+                if (e.clientX > window.innerWidth - 50) {
+                    sidebar.classList.remove('hide'); // Show sidebar when mouse is near right edge
+                } else {
+                    sidebar.classList.add('hide'); // Hide sidebar when mouse moves away
+                }
+            }
+        });
 
         // Toggle collapsible menu
         document.getElementById("collapsible").addEventListener("click", function() {
@@ -275,8 +279,8 @@
             var content = document.getElementById("collapsible-content4");
             content.style.display = content.style.display === "block" ? "none" : "block";
         });
-        // Initialize by showing the first pair of images
-        updateImages();
+
+        // More collapsible toggles
     </script>
 </body>
 </html>
