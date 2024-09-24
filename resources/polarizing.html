@@ -259,6 +259,34 @@
             }
         });
 
+	let currentPair = []; // Default pair to show
+
+        function showImages(img1, img2) {
+            // Set current pair of images to show
+            currentPair = [img1, img2];
+            updateImages();
+        }
+
+        function showImage1() {
+            document.getElementById(`image${currentPair[0]}`).style.opacity = '1';
+            document.getElementById(`image${currentPair[1]}`).style.opacity = '0';
+        }
+
+        function showImage2() {
+            document.getElementById(`image${currentPair[0]}`).style.opacity = '0';
+            document.getElementById(`image${currentPair[1]}`).style.opacity = '1';
+        }
+
+        function updateImages() {
+            // Hide all images first
+            const images = document.querySelectorAll('.image');
+            images.forEach(img => img.style.opacity = '0');
+
+            // Show only the current pair
+            document.getElementById(`image${currentPair[0]}`).style.opacity = '1';
+            document.getElementById(`image${currentPair[1]}`).style.opacity = '0';
+        }
+
         // Toggle collapsible menu
         document.getElementById("collapsible").addEventListener("click", function() {
             var content = document.getElementById("collapsible-content");
