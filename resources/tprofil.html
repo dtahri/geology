@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="U+075x">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>المقطع الطبوغرافي</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -12,14 +12,25 @@
       margin: 20px;
     }
    #map, #chart {
-      width: calc(100% - 400px); /* Same width as chart */
+
+      width: 100%;
+
+     	max-width: 600px;
       margin: 20px auto; /* Center with auto margins */
+
     }
+
     #map {
+
       height: 400px; /* Define the height of the map */
+
     }
     #chart {
-      height: 400px; /* Define the height of the chart */
+
+height: 100%;
+max-height: 400px;
+
+
     }   
 
     
@@ -54,7 +65,7 @@
   <!-- Include Leaflet JS and Chart.js -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="script.js"></script>
+  <script src="./resources/script.js"></script>
 
 </body>
 </html>
