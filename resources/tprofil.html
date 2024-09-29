@@ -12,14 +12,25 @@
       margin: 20px;
     }
    #map, #chart {
-      width: calc(100% - 400px); /* Same width as chart */
+
+      width: 100%;
+
+     	max-width: 600px;
       margin: 20px auto; /* Center with auto margins */
+
     }
+
     #map {
+
       height: 400px; /* Define the height of the map */
+
     }
     #chart {
-      height: 400px; /* Define the height of the chart */
+
+height: 100%;
+max-height: 400px;
+
+
     }   
 
     
@@ -41,7 +52,7 @@
 </head>
 <body>
   <div class="header">
-   <a href="../">الصفحة الأولى</a>
+   <a href="../index.html">الصفحة الأولى</a>
   </div>
   <h2>المقطع الطبوغرافي بين نقطتين "أ" و "ب".</h2>
   <h4>حدد داخل الخريطة موضع النقطتين "أ" و"ب" حتى يظهر المقطع. يمكن تحريك النقطتين، ويمكن أيضا الضغط على مسح لإعادة التعيين.</h4>
@@ -54,7 +65,7 @@
   <!-- Include Leaflet JS and Chart.js -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="./resources/script.js"></script>
+  <script src="script.js"></script>
 
 </body>
 </html>
