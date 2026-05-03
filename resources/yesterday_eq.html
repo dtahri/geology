@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<!--
+ @license
+ Copyright 2019 Google LLC. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+-->
+<html lang="ar" dir="rtl">
+  <head>
+
+    <title>“·«“· ÌÊ„ √„”</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <style>
+      /**
+       * @license
+       * Copyright 2019 Google LLC. All Rights Reserved.
+       * SPDX-License-Identifier: Apache-2.0
+       */
+      /* 
+       * Always set the map height explicitly to define the size of the div element
+       * that contains the map. 
+       */
+      #map {
+        height: 100%;
+      }
+
+      /** 
+       * Optional: Makes the sample page fill the window. 
+       */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      h2 {
+        margin-top: 0;
+        font-size: 1.2rem;
+      }
+
+      h3 {
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+      }
+
+      .info-window-content {
+        padding: 8px;
+        font-family: 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
+        text-align: right;
+        direction: rtl;
+      }
+
+      .info-window-content a {
+        display: inline-block;
+        margin-top: 8px;
+        color: #1a73e8;
+        text-decoration: none;
+      }
+
+      .info-window-content a:hover {
+        text-decoration: underline;
+      }
+
+      /*  ‰”Ìﬁ »”Ìÿ · Õ”Ì‰ ⁄—÷ «·‰Ê«›– «·„‰»Àﬁ… »«·⁄—»Ì… */
+      .gm-style .gm-style-iw-c {
+        max-width: 280px !important;
+      }
+      .title {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 100; /* √⁄·Ï „‰ «·Œ—Ìÿ… */
+        background-color: transparent; /* Œ·›Ì… ‘›«›… */
+        backdrop-filter: none;
+        padding: 0;
+        border-radius: 0;
+        box-shadow: none;
+        direction: rtl;
+        text-align: right;
+      }
+
+    </style>
+  </head>
+  <body>
+
+
+    <div class="title">
+      <p><a href="../">«·’›Õ… «·√Ê·Ï</a></p>
+    </div>
+
+
+    <div id="map"></div>
+    <script>
+      /**
+       * @license
+       * Copyright 2019 Google LLC. All Rights Reserved.
+       * SPDX-License-Identifier: Apache-2.0
+       */
+      
+      //  ⁄—Ì› «·„ €Ì—«  «·⁄«„…
+      let map;
+      let infoWindow;
+
+      function initMap() {
+        // ≈‰‘«¡ «·Œ—Ìÿ… »„—ﬂ“ „‰«”» ··⁄«·„
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: 20, lng: -160 },
+          zoom: 2,
+          // ≈÷«›… œ⁄„ «·« Ã«Â „‰ «·Ì„Ì‰ ··Ì”«— ·· Õﬂ„
+          rtl: true,
+        });
+
+        infoWindow = new google.maps.InfoWindow({
+          content: "",
+        });
+
+        // Ã·» »Ì«‰«  «·“·«“· (»’Ì€… JSONP)
+        // Â–« «·„’œ— „‰ ÂÌ∆… «·„”Õ «·ÃÌÊ·ÊÃÌ «·√„—ÌﬂÌ… (USGS)
+        const script = document.createElement("script");
+        script.setAttribute(
+          "src",
+          "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojsonp"
+        );
+        document.getElementsByTagName("head")[0].appendChild(script);
+      }
+
+      // œ«·… «·„⁄«·Ã… «·„” œ⁄«… „‰ „·› JSONP
+      function eqfeed_callback(results) {
+        // «· √ﬂœ „‰ ÊÃÊœ ‰ «∆Ã
+        if (!results || !results.features) return;
+
+        for (let i = 0; i < results.features.length; i++) {
+          const coords = results.features[i].geometry.coordinates;
+          // «·≈Õœ«ÀÌ« : Œÿ «·ÿÊ· (lng) À„ Œÿ «·⁄—÷ (lat) - Õ”» «·„⁄Ì«—
+          const latLng = new google.maps.LatLng(coords[1], coords[0]);
+          
+          // ≈‰‘«¡ ⁄·«„… (Marker) ·ﬂ· “·“«·
+          const marker = new google.maps.Marker({
+            position: latLng,
+            map: map,
+            title: results.features[i].properties.place, // ‰’ „”«⁄œ ··⁄·«„…
+          });
+
+          const properties = results.features[i].properties;
+
+          // ≈÷«›… „” „⁄ ÕœÀ «·‰ﬁ— ⁄·Ï «·⁄·«„… ·⁄—÷ „⁄·Ê„«  „›’·… »«·⁄—»Ì…
+          marker.addListener("click", () => {
+            //  ÕÊÌ· «· ÊﬁÌ  «·“„‰Ì („··Ì À«‰Ì…) ≈·Ï  «—ÌŒ „›ÂÊ„
+            const earthquakeDate = new Date(0);
+            earthquakeDate.setUTCMilliseconds(properties.time);
+
+            //  ‰”Ìﬁ «· «—ÌŒ Ê«·Êﬁ  »ÿ—Ìﬁ… ⁄—»Ì… Ê«÷Õ…
+            const formattedDate = earthquakeDate.toLocaleString('ar-EG', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+              timeZone: 'UTC',
+              timeZoneName: 'short'
+            });
+            
+            // »‰«¡ „Õ ÊÏ ‰«›–… «·„⁄·Ê„«  »«··€… «·⁄—»Ì…
+            // ‰⁄—÷ „ﬂ«‰ «·“·“«·° ﬁÊ Â° «· «—ÌŒ° Ê—«»ÿ ·„“Ìœ „‰ «· ›«’Ì·
+            const magnitudeValue = properties.mag !== null && properties.mag !== undefined 
+              ? properties.mag.toFixed(1) 
+              : '€Ì— „⁄—Ê›';
+            
+            const placeName = properties.place || '„Êﬁ⁄ €Ì— „Õœœ';
+            
+            //  ’„Ì„ „Õ ÊÏ «·‰«›–… „⁄ œ⁄„ ﬂ«„· ··€… «·⁄—»Ì…
+            const contentString = `
+              <div class="info-window-content" dir="rtl">
+                <h2> ${escapeHtml(placeName)}</h2>
+                <h3>ﬁÊ… «·“·“«·: ${magnitudeValue} œ—Ã…</h3>
+                <p>«· ÊﬁÌ : ${formattedDate}</p>
+                <a href="${properties.url}" target="_blank" rel="noopener noreferrer">⁄—÷ «· ›«’Ì· ⁄·Ï ÂÌ∆… «·„”Õ «·ÃÌÊ·ÊÃÌ «·√„—ÌﬂÌ… (USGS)</a>
+              </div>
+            `;
+
+            infoWindow.setContent(contentString);
+            infoWindow.open({
+              anchor: marker,
+              map: map,
+              shouldFocus: false,
+            });
+          });
+        }
+      }
+      
+      // œ«·… »”Ìÿ… ··Êﬁ«Ì… „‰ ⁄·«„«  HTML «·÷«—… (√„«‰ ≈÷«›Ì)
+      function escapeHtml(str) {
+        if (!str) return '';
+        return str
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      // —»ÿ «·œÊ«· »«·‰«›–… «·⁄„Ê„Ì… · ﬂÊ‰ „ «Õ… ·‹ JSONP
+      window.initMap = initMap;
+      window.eqfeed_callback = eqfeed_callback;
+    </script>
+    
+    <!--  Õ„Ì· „ﬂ »… Œ—«∆ÿ Google „⁄ „› «Õ API «·„ﬁœ„ -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-2gcha9tU4XIfH8x8J3MH8E9VtM_rPAY&callback=initMap&v=weekly&language=ar&region=EG"
+      defer
+    ></script>
+  </body>
+</html>
