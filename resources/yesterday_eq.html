@@ -7,7 +7,7 @@
 <html lang="ar" dir="rtl">
   <head>
 
-    <title>าแวาแ ํๆใ รใำ</title>
+    <title>ุฒูุงุฒู ููู… ุฃู…ุณ</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <style>
       /**
@@ -61,7 +61,7 @@
         text-decoration: underline;
       }
 
-      /* สไำํÞ ศำํุ แสอำํไ ฺัึ วแไๆวÝะ วแใไศหÞษ ศวแฺัศํษ */
+      /* ุชูุณูู ุจุณูุท ูุชุญุณูู ุนุฑุถ ุงูููุงูุฐ ุงูู…ูุจุซูุฉ ุจุงูุนุฑุจูุฉ */
       .gm-style .gm-style-iw-c {
         max-width: 280px !important;
       }
@@ -69,8 +69,8 @@
         position: absolute;
         top: 20px;
         right: 20px;
-        z-index: 100; /* รฺแ์ ใไ วแฮัํุษ */
-        background-color: transparent; /* ฮแÝํษ ิÝวÝษ */
+        z-index: 100; /* ุฃุนูู ู…ู ุงูุฎุฑูุทุฉ */
+        background-color: transparent; /* ุฎูููุฉ ุดูุงูุฉ */
         backdrop-filter: none;
         padding: 0;
         border-radius: 0;
@@ -85,7 +85,7 @@
 
 
     <div class="title">
-      <p><a href="../">วแีÝอษ วแรๆแ์</a></p>
+      <p><a href="../">ุงูุตูุญุฉ ุงูุฃููู</a></p>
     </div>
 
 
@@ -97,16 +97,16 @@
        * SPDX-License-Identifier: Apache-2.0
        */
       
-      // สฺัํÝ วแใสÛํัวส วแฺวใษ
+      // ุชุนุฑูู ุงูู…ุชุบูุฑุงุช ุงูุนุงู…ุฉ
       let map;
       let infoWindow;
 
       function initMap() {
-        // ลไิวม วแฮัํุษ ศใั฿า ใไวำศ แแฺวแใ
+        // ุฅูุดุงุก ุงูุฎุฑูุทุฉ ุจู…ุฑูุฒ ู…ูุงุณุจ ููุนุงูู…
         map = new google.maps.Map(document.getElementById("map"), {
           center: { lat: 20, lng: -160 },
           zoom: 2,
-          // ลึวÝษ ฯฺใ วแวสฬวๅ ใไ วแํใํไ แแํำวั แแสอ฿ใ
+          // ุฅุถุงูุฉ ุฏุนู… ุงูุงุชุฌุงู ู…ู ุงููู…ูู ูููุณุงุฑ ููุชุญูู…
           rtl: true,
         });
 
@@ -114,8 +114,8 @@
           content: "",
         });
 
-        // ฬแศ ศํวไวส วแาแวาแ (ศีํÛษ JSONP)
-        // ๅะว วแใีฯั ใไ ๅํฦษ วแใำอ วแฬํๆแๆฬํ วแรใัํ฿ํษ (USGS)
+        // ุฌูุจ ุจูุงูุงุช ุงูุฒูุงุฒู (ุจุตูุบุฉ JSONP)
+        // ูุฐุง ุงูู…ุตุฏุฑ ู…ู ููุฆุฉ ุงูู…ุณุญ ุงูุฌููููุฌู ุงูุฃู…ุฑูููุฉ (USGS)
         const script = document.createElement("script");
         script.setAttribute(
           "src",
@@ -124,32 +124,32 @@
         document.getElementsByTagName("head")[0].appendChild(script);
       }
 
-      // ฯวแษ วแใฺวแฬษ วแใำสฯฺวษ ใไ ใแÝ JSONP
+      // ุฏุงูุฉ ุงูู…ุนุงูุฌุฉ ุงูู…ุณุชุฏุนุงุฉ ู…ู ู…ูู JSONP
       function eqfeed_callback(results) {
-        // วแสร฿ฯ ใไ ๆฬๆฯ ไสวฦฬ
+        // ุงูุชุฃูุฏ ู…ู ูุฌูุฏ ูุชุงุฆุฌ
         if (!results || !results.features) return;
 
         for (let i = 0; i < results.features.length; i++) {
           const coords = results.features[i].geometry.coordinates;
-          // วแลอฯวหํวส: ฮุ วแุๆแ (lng) หใ ฮุ วแฺัึ (lat) - อำศ วแใฺํวั
+          // ุงูุฅุญุฏุงุซูุงุช: ุฎุท ุงูุทูู (lng) ุซู… ุฎุท ุงูุนุฑุถ (lat) - ุญุณุจ ุงูู…ุนูุงุฑ
           const latLng = new google.maps.LatLng(coords[1], coords[0]);
           
-          // ลไิวม ฺแวใษ (Marker) แ฿แ าแาวแ
+          // ุฅูุดุงุก ุนูุงู…ุฉ (Marker) ููู ุฒูุฒุงู
           const marker = new google.maps.Marker({
             position: latLng,
             map: map,
-            title: results.features[i].properties.place, // ไี ใำวฺฯ แแฺแวใษ
+            title: results.features[i].properties.place, // ูุต ู…ุณุงุนุฏ ููุนูุงู…ุฉ
           });
 
           const properties = results.features[i].properties;
 
-          // ลึวÝษ ใำสใฺ อฯห วแไÞั ฺแ์ วแฺแวใษ แฺัึ ใฺแๆใวส ใÝีแษ ศวแฺัศํษ
+          // ุฅุถุงูุฉ ู…ุณุชู…ุน ุญุฏุซ ุงูููุฑ ุนูู ุงูุนูุงู…ุฉ ูุนุฑุถ ู…ุนููู…ุงุช ู…ูุตูุฉ ุจุงูุนุฑุจูุฉ
           marker.addListener("click", () => {
-            // สอๆํแ วแสๆÞํส วแาใไํ (ใแแํ หวไํษ) ลแ์ สวัํฮ ใÝๅๆใ
+            // ุชุญููู ุงูุชูููุช ุงูุฒู…ูู (ู…ููู ุซุงููุฉ) ุฅูู ุชุงุฑูุฎ ู…ูููู…
             const earthquakeDate = new Date(0);
             earthquakeDate.setUTCMilliseconds(properties.time);
 
-            // สไำํÞ วแสวัํฮ ๆวแๆÞส ศุัํÞษ ฺัศํษ ๆวึอษ
+            // ุชูุณูู ุงูุชุงุฑูุฎ ูุงูููุช ุจุทุฑููุฉ ุนุฑุจูุฉ ูุงุถุญุฉ
             const formattedDate = earthquakeDate.toLocaleString('ar-EG', {
               year: 'numeric',
               month: 'long',
@@ -161,21 +161,21 @@
               timeZoneName: 'short'
             });
             
-            // ศไวม ใอสๆ์ ไวÝะษ วแใฺแๆใวส ศวแแÛษ วแฺัศํษ
-            // ไฺัึ ใ฿วไ วแาแาวแก Þๆสๅก วแสวัํฮก ๆัวศุ แใาํฯ ใไ วแสÝวีํแ
+            // ุจูุงุก ู…ุญุชูู ูุงูุฐุฉ ุงูู…ุนููู…ุงุช ุจุงููุบุฉ ุงูุนุฑุจูุฉ
+            // ูุนุฑุถ ู…ูุงู ุงูุฒูุฒุงูุ ููุชูุ ุงูุชุงุฑูุฎุ ูุฑุงุจุท ูู…ุฒูุฏ ู…ู ุงูุชูุงุตูู
             const magnitudeValue = properties.mag !== null && properties.mag !== undefined 
               ? properties.mag.toFixed(1) 
-              : 'Ûํั ใฺัๆÝ';
+              : 'ุบูุฑ ู…ุนุฑูู';
             
-            const placeName = properties.place || 'ใๆÞฺ Ûํั ใอฯฯ';
+            const placeName = properties.place || 'ู…ููุน ุบูุฑ ู…ุญุฏุฏ';
             
-            // สีใํใ ใอสๆ์ วแไวÝะษ ใฺ ฯฺใ ฿วใแ แแÛษ วแฺัศํษ
+            // ุชุตู…ูู… ู…ุญุชูู ุงููุงูุฐุฉ ู…ุน ุฏุนู… ูุงู…ู ููุบุฉ ุงูุนุฑุจูุฉ
             const contentString = `
               <div class="info-window-content" dir="rtl">
                 <h2> ${escapeHtml(placeName)}</h2>
-                <h3>Þๆษ วแาแาวแ: ${magnitudeValue} ฯัฬษ</h3>
-                <p>วแสๆÞํส: ${formattedDate}</p>
-                <a href="${properties.url}" target="_blank" rel="noopener noreferrer">ฺัึ วแสÝวีํแ ฺแ์ ๅํฦษ วแใำอ วแฬํๆแๆฬํ วแรใัํ฿ํษ (USGS)</a>
+                <h3>ููุฉ ุงูุฒูุฒุงู: ${magnitudeValue} ุฏุฑุฌุฉ</h3>
+                <p>ุงูุชูููุช: ${formattedDate}</p>
+                <a href="${properties.url}" target="_blank" rel="noopener noreferrer">ุนุฑุถ ุงูุชูุงุตูู ุนูู ููุฆุฉ ุงูู…ุณุญ ุงูุฌููููุฌู ุงูุฃู…ุฑูููุฉ (USGS)</a>
               </div>
             `;
 
@@ -189,7 +189,7 @@
         }
       }
       
-      // ฯวแษ ศำํุษ แแๆÞวํษ ใไ ฺแวใวส HTML วแึวัษ (รใวไ ลึวÝํ)
+      // ุฏุงูุฉ ุจุณูุทุฉ ููููุงูุฉ ู…ู ุนูุงู…ุงุช HTML ุงูุถุงุฑุฉ (ุฃู…ุงู ุฅุถุงูู)
       function escapeHtml(str) {
         if (!str) return '';
         return str
@@ -200,12 +200,12 @@
           .replace(/'/g, '&#39;');
       }
 
-      // ัศุ วแฯๆวแ ศวแไวÝะษ วแฺใๆใํษ แส฿ๆไ ใสวอษ แÜ JSONP
+      // ุฑุจุท ุงูุฏูุงู ุจุงููุงูุฐุฉ ุงูุนู…ูู…ูุฉ ูุชููู ู…ุชุงุญุฉ ูู€ JSONP
       window.initMap = initMap;
       window.eqfeed_callback = eqfeed_callback;
     </script>
     
-    <!-- สอใํแ ใ฿สศษ ฮัวฦุ Google ใฺ ใÝสวอ API วแใÞฯใ -->
+    <!-- ุชุญู…ูู ู…ูุชุจุฉ ุฎุฑุงุฆุท Google ู…ุน ู…ูุชุงุญ API ุงูู…ูุฏู… -->
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-2gcha9tU4XIfH8x8J3MH8E9VtM_rPAY&callback=initMap&v=weekly&language=ar&region=EG"
       defer
